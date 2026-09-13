@@ -7,6 +7,11 @@
   <meta name="theme-color" content="#1b4332">
   <script src="./S.I.P.MA - Sistema Integrado Porcino en Matadero_files/xlsx.full.min.js.descarga"></script>
   <script src="./S.I.P.MA - Sistema Integrado Porcino en Matadero_files/saved_resource"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js');
+  }
+</script>
   <style>
     body { font-family: 'Times New Roman', Times, serif; -webkit-tap-highlight-color: transparent; }
     /* Prevenir zoom forzado en campos en móviles */
