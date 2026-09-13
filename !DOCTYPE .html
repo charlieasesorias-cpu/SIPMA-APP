@@ -1,0 +1,1048 @@
+﻿<!DOCTYPE html>
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>S.I.P.MA - Sistema Integrado Porcino en Matadero</title>
+  <script src="./S.I.P.MA - Sistema Integrado Porcino en Matadero_files/xlsx.full.min.js.descarga"></script>
+  <script src="./S.I.P.MA - Sistema Integrado Porcino en Matadero_files/saved_resource"></script>
+  <style>
+    body { font-family: 'Times New Roman', Times, serif; -webkit-tap-highlight-color: transparent; }
+    /* Prevenir zoom forzado en campos en móviles */
+    input, select, button { font-size: 16px !important; }
+    @media (min-width: 640px) {
+      input, select, button { font-size: 14px !important; }
+    }
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #seccion-informe-impresion, #seccion-informe-impresion * {
+        visibility: visible;
+      }
+      #seccion-informe-impresion {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        background: white !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+
+    /* Fondo Mosaico de Emojis en Agua para la Portada */
+    .bg-mosaico-portada {
+      background-color: #ebebe6;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Ctext x='10' y='35' font-size='22' fill='%231b4332' font-family='Times New Roman' opacity='0.15'%3E%24 %2C %25 Kg 🔢%3C/text%3E%3Ctext x='130' y='85' font-size='22' fill='%23219665' font-family='Times New Roman' opacity='0.15'%3E💲 📊 🗓️ 🕘%3C/text%3E%3Ctext x='20' y='145' font-size='22' fill='%23968b21' font-family='Times New Roman' opacity='0.15'%3E🕘 %24 Kg 💲 📊%3C/text%3E%3Ctext x='110' y='205' font-size='22' fill='%23b0a07b' font-family='Times New Roman' opacity='0.15'%3E🗓️ %25 🔢 %2C Kg%3C/text%3E%3C/svg%3E");
+    }
+  </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.fixed{position:fixed}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0px}.top-0{top:0px}.z-50{z-index:50}.mx-auto{margin-left:auto;margin-right:auto}.mb-1{margin-bottom:0.25rem}.mb-2{margin-bottom:0.5rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mt-0\.5{margin-top:0.125rem}.mb-3{margin-bottom:0.75rem}.mt-2{margin-top:0.5rem}.mt-3{margin-top:0.75rem}.mt-6{margin-top:1.5rem}.block{display:block}.flex{display:flex}.grid{display:grid}.hidden{display:none}.max-h-\[90vh\]{max-height:90vh}.min-h-screen{min-height:100vh}.w-full{width:100%}.min-w-\[1100px\]{min-width:1100px}.min-w-\[750px\]{min-width:750px}.max-w-7xl{max-width:80rem}.max-w-2xl{max-width:42rem}.flex-1{flex:1 1 0%}.table-auto{table-layout:auto}.border-collapse{border-collapse:collapse}.cursor-pointer{cursor:pointer}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-col{flex-direction:column}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:0.25rem}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-x-2 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.5rem * var(--tw-space-x-reverse));margin-left:calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-0\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.125rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.125rem * var(--tw-space-y-reverse))}.divide-y > :not([hidden]) ~ :not([hidden]){--tw-divide-y-reverse:0;border-top-width:calc(1px * calc(1 - var(--tw-divide-y-reverse)));border-bottom-width:calc(1px * var(--tw-divide-y-reverse))}.divide-\[\#e2ded6\] > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(226 222 214 / var(--tw-divide-opacity, 1))}.overflow-x-auto{overflow-x:auto}.overflow-y-auto{overflow-y:auto}.whitespace-pre-line{white-space:pre-line}.rounded-2xl{border-radius:1rem}.rounded-lg{border-radius:0.5rem}.rounded-xl{border-radius:0.75rem}.rounded{border-radius:0.25rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-t-4{border-top-width:4px}.border-t{border-top-width:1px}.border-r{border-right-width:1px}.border-\[\#1b4332\]{--tw-border-opacity:1;border-color:rgb(27 67 50 / var(--tw-border-opacity, 1))}.border-\[\#e2ded6\]{--tw-border-opacity:1;border-color:rgb(226 222 214 / var(--tw-border-opacity, 1))}.border-\[\#c5a880\]{--tw-border-opacity:1;border-color:rgb(197 168 128 / var(--tw-border-opacity, 1))}.border-\[\#e2ded6\]\/30{border-color:rgb(226 222 214 / 0.3)}.border-transparent{border-color:transparent}.bg-\[\#fcfbf7\]{--tw-bg-opacity:1;background-color:rgb(252 251 247 / var(--tw-bg-opacity, 1))}.bg-\[\#1b4332\]{--tw-bg-opacity:1;background-color:rgb(27 67 50 / var(--tw-bg-opacity, 1))}.bg-\[\#e2ded6\]{--tw-bg-opacity:1;background-color:rgb(226 222 214 / var(--tw-bg-opacity, 1))}.bg-\[\#ffffff\]{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-stone-50\/50{background-color:rgb(250 250 249 / 0.5)}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-\[\#2c3e50\]{--tw-bg-opacity:1;background-color:rgb(44 62 80 / var(--tw-bg-opacity, 1))}.bg-\[\#2d6a4f\]{--tw-bg-opacity:1;background-color:rgb(45 106 79 / var(--tw-bg-opacity, 1))}.bg-\[\#f4f1ea\]{--tw-bg-opacity:1;background-color:rgb(244 241 234 / var(--tw-bg-opacity, 1))}.bg-black{--tw-bg-opacity:1;background-color:rgb(0 0 0 / var(--tw-bg-opacity, 1))}.bg-stone-300{--tw-bg-opacity:1;background-color:rgb(214 211 209 / var(--tw-bg-opacity, 1))}.bg-stone-50{--tw-bg-opacity:1;background-color:rgb(250 250 249 / var(--tw-bg-opacity, 1))}.bg-amber-500{--tw-bg-opacity:1;background-color:rgb(245 158 11 / var(--tw-bg-opacity, 1))}.bg-blue-600{--tw-bg-opacity:1;background-color:rgb(37 99 235 / var(--tw-bg-opacity, 1))}.bg-emerald-50{--tw-bg-opacity:1;background-color:rgb(236 253 245 / var(--tw-bg-opacity, 1))}.bg-rose-50{--tw-bg-opacity:1;background-color:rgb(255 241 242 / var(--tw-bg-opacity, 1))}.bg-rose-500{--tw-bg-opacity:1;background-color:rgb(244 63 94 / var(--tw-bg-opacity, 1))}.bg-stone-700{--tw-bg-opacity:1;background-color:rgb(68 64 60 / var(--tw-bg-opacity, 1))}.bg-opacity-50{--tw-bg-opacity:0.5}.bg-opacity-30{--tw-bg-opacity:0.3}.p-2{padding:0.5rem}.p-1\.5{padding:0.375rem}.p-2\.5{padding:0.625rem}.p-3{padding:0.75rem}.p-1{padding:0.25rem}.p-4{padding:1rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.pb-3{padding-bottom:0.75rem}.pt-3{padding-top:0.75rem}.pt-4{padding-top:1rem}.text-left{text-align:left}.text-center{text-align:center}.font-mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}.text-base{font-size:1rem;line-height:1.5rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.text-2xl{font-size:1.5rem;line-height:2rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.font-black{font-weight:900}.font-bold{font-weight:700}.font-semibold{font-weight:600}.font-medium{font-weight:500}.italic{font-style:italic}.leading-relaxed{line-height:1.625}.tracking-wide{letter-spacing:0.025em}.tracking-wider{letter-spacing:0.05em}.text-\[\#2c3e50\]{--tw-text-opacity:1;color:rgb(44 62 80 / var(--tw-text-opacity, 1))}.text-\[\#1b4332\]{--tw-text-opacity:1;color:rgb(27 67 50 / var(--tw-text-opacity, 1))}.text-\[\#c5a880\]{--tw-text-opacity:1;color:rgb(197 168 128 / var(--tw-text-opacity, 1))}.text-\[\#ffffff\]{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-red-700{--tw-text-opacity:1;color:rgb(185 28 28 / var(--tw-text-opacity, 1))}.text-stone-500{--tw-text-opacity:1;color:rgb(120 113 108 / var(--tw-text-opacity, 1))}.text-stone-800{--tw-text-opacity:1;color:rgb(41 37 36 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-amber-700{--tw-text-opacity:1;color:rgb(180 83 9 / var(--tw-text-opacity, 1))}.text-blue-700{--tw-text-opacity:1;color:rgb(29 78 216 / var(--tw-text-opacity, 1))}.text-emerald-950{--tw-text-opacity:1;color:rgb(2 44 34 / var(--tw-text-opacity, 1))}.text-rose-950{--tw-text-opacity:1;color:rgb(76 5 25 / var(--tw-text-opacity, 1))}.text-stone-600{--tw-text-opacity:1;color:rgb(87 83 78 / var(--tw-text-opacity, 1))}.text-stone-900{--tw-text-opacity:1;color:rgb(28 25 23 / var(--tw-text-opacity, 1))}.opacity-80{opacity:0.8}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow{--tw-shadow:0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-inner{--tw-shadow:inset 0 2px 4px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:inset 0 2px 4px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.ring-2{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.ring-\[\#c5a880\]{--tw-ring-opacity:1;--tw-ring-color:rgb(197 168 128 / var(--tw-ring-opacity, 1))}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.hover\:scale-110:hover{--tw-scale-x:1.1;--tw-scale-y:1.1;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:border-\[\#c5a880\]:hover{--tw-border-opacity:1;border-color:rgb(197 168 128 / var(--tw-border-opacity, 1))}.hover\:bg-\[\#c5a880\]:hover{--tw-bg-opacity:1;background-color:rgb(197 168 128 / var(--tw-bg-opacity, 1))}.hover\:bg-\[\#143225\]:hover{--tw-bg-opacity:1;background-color:rgb(20 50 37 / var(--tw-bg-opacity, 1))}.hover\:bg-\[\#1b4332\]:hover{--tw-bg-opacity:1;background-color:rgb(27 67 50 / var(--tw-bg-opacity, 1))}.hover\:bg-stone-400:hover{--tw-bg-opacity:1;background-color:rgb(168 162 158 / var(--tw-bg-opacity, 1))}.hover\:bg-amber-600:hover{--tw-bg-opacity:1;background-color:rgb(217 119 6 / var(--tw-bg-opacity, 1))}.hover\:bg-rose-600:hover{--tw-bg-opacity:1;background-color:rgb(225 29 72 / var(--tw-bg-opacity, 1))}.hover\:bg-stone-800:hover{--tw-bg-opacity:1;background-color:rgb(41 37 36 / var(--tw-bg-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.hover\:text-stone-800:hover{--tw-text-opacity:1;color:rgb(41 37 36 / var(--tw-text-opacity, 1))}@media (min-width: 640px){.sm\:w-auto{width:auto}.sm\:flex-none{flex:none}.sm\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.sm\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.sm\:flex-row{flex-direction:row}.sm\:items-center{align-items:center}.sm\:p-6{padding:1.5rem}.sm\:p-4{padding:1rem}.sm\:py-2{padding-top:0.5rem;padding-bottom:0.5rem}.sm\:py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.sm\:text-left{text-align:left}.sm\:text-right{text-align:right}.sm\:text-2xl{font-size:1.5rem;line-height:2rem}.sm\:text-lg{font-size:1.125rem;line-height:1.75rem}.sm\:text-sm{font-size:0.875rem;line-height:1.25rem}.sm\:text-xl{font-size:1.25rem;line-height:1.75rem}}@media (min-width: 768px){.md\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.md\:grid-cols-5{grid-template-columns:repeat(5, minmax(0, 1fr))}}</style></head>
+<body class="bg-[#fcfbf7] text-[#2c3e50] p-2 sm:p-6 min-h-screen">
+
+  <!-- SECCIÓN DE PORTADA / LANDING SCREEN -->
+  <div id="pantalla-portada" class="fixed inset-0 z-50 flex items-center justify-center p-3 bg-mosaico-portada overflow-y-auto">
+    <div class="w-full max-w-xl bg-white/95 backdrop-blur-md shadow-2xl rounded-2xl p-6 border-2 border-[#1b4332] flex flex-col justify-between my-auto">
+      
+      <!-- Encabezado de Portada -->
+      <div class="text-center border-b-2 border-[#1b4332] pb-4 mb-5">
+        <h1 class="text-2xl sm:text-3xl font-black text-[#1b4332] tracking-wide mb-1">💻 CONSULTEK 📊</h1>
+        <h2 class="text-xl sm:text-2xl font-bold text-[#219665]">Sistema Integrado Porcino Matadero</h2>
+        <h3 class="text-2xl sm:text-3xl font-black text-[#968b21] tracking-wider my-1">S.I.P.MA 🐷</h3>
+        
+        <div class="mt-3 inline-flex flex-wrap justify-center gap-4 text-sm sm:text-base font-bold bg-[#ebebe6] px-4 py-2 rounded-xl border border-[#b0a07b] text-[#1b4332]">
+          <div> 🗓️Fecha : <span id="portada-fecha" class="text-[#219665]">--/--/----</span></div>
+          <div>🕘Hora : <span id="portada-hora" class="text-[#968b21]">--:--:--</span></div>
+        </div>
+      </div>
+
+      <!-- Centro: Formulario de Usuario y Acceso -->
+      <form id="form-portada" onsubmit="ingresarAlSistema(event)" class="space-y-4 my-2">
+        <div>
+          <label class="block text-sm font-bold text-[#1b4332] mb-1">Nombre de Usuario:</label>
+          <input type="text" id="portada-usuario" maxlength="15" placeholder="Ingrese usuario (max 15 car.)" required class="w-full p-3 rounded-xl border-2 border-[#1b4332] bg-white font-semibold text-[#1b4332] shadow-[0_4px_10px_rgba(27,67,50,0.25)] outline-none focus:ring-2 focus:ring-[#219665]">
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold text-[#1b4332] mb-1">Correo Electrónico:</label>
+          <input type="email" id="portada-correo" maxlength="35" placeholder="correo@ejemplo.com (max 35 car.)" required class="w-full p-3 rounded-xl border-2 border-[#1b4332] bg-white font-semibold text-[#1b4332] shadow-[0_4px_10px_rgba(27,67,50,0.25)] outline-none focus:ring-2 focus:ring-[#219665]">
+        </div>
+
+        <div class="pt-2">
+          <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-[#1b4332] hover:bg-[#219665] text-white font-black text-lg sm:text-xl transition duration-200 shadow-lg flex items-center justify-center gap-2 border border-[#b0a07b]">
+            Enter ➡️
+          </button>
+        </div>
+      </form>
+
+      <!-- Pie de Página de Portada -->
+      <div class="mt-6 border-t border-[#b0a07b] pt-4 text-center space-y-1 text-xs sm:text-sm text-[#1b4332]">
+        <p class="font-bold italic text-[#1b4332]">Con$ulTek: Dónde los números cobran sentidos y las oportunidades se convierten en resultados.</p>
+        <p class="font-bold text-[#219665]">WhatsApp 0424-4073329 // 0412-7465757 para mayor información</p>
+        <div class="pt-1 text-xs font-semibold text-[#1b4332]">
+          <p>Correos Electrónicos:</p>
+          <p class="text-[#219665]">LorenaLobo.Consultek@gmail.com</p>
+          <p class="text-[#219665]">Charlie.Asesorias@gmail.com</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECCIÓN PRINCIPAL DEL SISTEMA (MANTENIDA 100% INTACTA) -->
+  <div id="contenedor-principal-sistema" class="w-full max-w-7xl mx-auto bg-white shadow-xl rounded-2xl p-3 sm:p-6 relative border border-[#e2ded6] hidden">
+    
+    <div class="flex flex-col sm:flex-row justify-between items-center mb-4 border-b border-[#e2ded6] pb-3 gap-3">
+      <div class="text-center sm:text-left">
+        <h1 class="text-xl sm:text-2xl font-bold text-[#1b4332] tracking-wide">Sistema Integrado Porcino en Matadero</h1>
+        <h2 class="text-xl sm:text-2xl font-black text-[#c5a880] tracking-wider">S.I.P.MA 🐖</h2>
+      </div>
+      <div class="text-center sm:text-right bg-stone-50/50 p-2.5 rounded-xl border border-[#e2ded6]">
+        <h3 class="text-sm font-bold text-[#1b4332]">ConsulTek <span class="text-[#c5a880]">✦</span></h3>
+        <p class="italic text-xs text-[#2c3e50]">Donde los números cobran sentido y las oportunidades se convierten en resultados.</p>
+        <p class="text-xs font-bold text-[#1b4332] mt-0.5">WhatsApp: 0424-4073329 // 0412-7465757</p>
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-2 mb-6 bg-[#e2ded6] p-1.5 rounded-xl border border-[#e2ded6]">
+      <button onclick="cambiarPestaana('pestaana-gastos')" id="btn-pestaana-gastos" class="w-full py-3 sm:py-2 font-bold rounded-lg bg-[#1b4332] text-[#ffffff] transition text-center shadow-md">💰 1. Recepción de Animales</button>
+      <button onclick="cambiarPestaana('pestaana-faena')" id="btn-pestaana-faena" class="w-full py-3 sm:py-2 font-bold rounded-lg text-[#2c3e50] bg-[#e2ded6] hover:bg-[#c5a880] hover:text-white transition text-center">🔥 2. Faena Caliente</button>
+      <button onclick="cambiarPestaana('pestaana-despacho')" id="btn-pestaana-despacho" class="w-full py-3 sm:py-2 font-bold rounded-lg text-[#2c3e50] bg-[#e2ded6] hover:bg-[#c5a880] hover:text-white transition text-center">❄️ 3. Despacho Frío</button>
+    </div>
+
+    <div id="pestaana-gastos" class="seccion-proceso space-y-4">
+      <div class="bg-[#ffffff] p-3 sm:p-4 rounded-xl border border-[#e2ded6] border-t-4 border-[#1b4332] shadow-sm">
+        <h3 class="text-base sm:text-lg font-bold text-[#1b4332] mb-2 flex items-center gap-1"><span class="text-[#c5a880]">💰</span> Control de Gastos del Día</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-[#2c3e50] mb-1">Fecha del Día</label>
+            <input type="date" id="gasto-fecha" class="border border-[#e2ded6] p-2.5 rounded-lg w-full bg-white shadow-sm" onchange="dispararRecalculoPorCambioGasto()">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-[#2c3e50] mb-1">Matanza ($/Cabeza)</label>
+            <input type="number" id="gasto-matanza" placeholder="Ej:10,00" step="0.01" class="border border-[#e2ded6] p-2.5 rounded-lg w-full bg-white shadow-sm" oninput="dispararRecalculoPorCambioGasto()">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-[#2c3e50] mb-1">Gastos Operativos ($ Total)</label>
+            <input type="number" id="gasto-operativos" placeholder="Ej:10,00" step="0.01" class="border border-[#e2ded6] p-2.5 rounded-lg w-full bg-white shadow-sm" oninput="dispararRecalculoPorCambioGasto()">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-[#2c3e50] mb-1">Flete / Transporte ($ Total)</label>
+            <input type="number" id="gasto-transporte" placeholder="Ej:10,00" step="0.01" class="border border-[#e2ded6] p-2.5 rounded-lg w-full bg-white shadow-sm" oninput="dispararRecalculoPorCambioGasto()">
+          </div>
+        </div>
+      </div>
+
+      <form id="form-crear-lote" class="bg-[#ffffff] p-3 sm:p-4 rounded-xl border border-[#e2ded6] border-t-4 border-[#1b4332] space-y-3 shadow-sm">
+        <h3 class="text-base sm:text-lg font-bold text-[#1b4332] flex items-center gap-1"><span class="text-[#c5a880]">📥</span> Recepción y Creación de Lote</h3>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-[#2c3e50] mb-1">Código Lote</label>
+            <input type="text" id="lote-codigo" placeholder="Ej: LOTE-0907" class="border border-[#e2ded6] p-2.5 rounded-lg w-full shadow-sm" required="">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-[#2c3e50] mb-1">Proveedor</label>
+            <input type="text" id="lote-proveedor" list="lista-proveedores" placeholder="Escriba o seleccione..." class="border border-[#e2ded6] p-2.5 rounded-lg w-full shadow-sm" required="">
+            <datalist id="lista-proveedores"></datalist>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-[#2c3e50] mb-1">Tipo Animal</label>
+            <select id="lote-tipo" class="border border-[#e2ded6] p-2.5 rounded-lg w-full shadow-sm bg-white">
+              <option value="Cerdos">Cerdos</option>
+              <option value="Madres">Madres</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-[#2c3e50] mb-1">Unidades (Cabezas)</label>
+            <input type="number" id="lote-unidades" placeholder="Ej: 24" class="border border-[#e2ded6] p-2.5 rounded-lg w-full shadow-sm" required="">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-[#2c3e50] mb-1">Precio Compra ($/Kg Vivo)</label>
+            <input type="number" id="lote-precio-compra" step="0.01" placeholder="0.00" class="border border-[#e2ded6] p-2.5 rounded-lg w-full shadow-sm" required="">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-stone-50 p-3 rounded-xl border border-[#e2ded6] mt-2">
+          <div>
+            <label class="block text-xs font-bold text-[#2c3e50] mb-1">Pesada Inicial (Kg Vivo)</label>
+            <input type="number" id="lote-kg-inicial" step="0.01" placeholder="0.00" class="border border-[#e2ded6] p-2.5 rounded-lg w-full shadow-sm" required="">
+          </div>
+          <div class="flex items-end">
+            <button type="submit" class="bg-[#1b4332] hover:bg-[#143225] text-white font-bold py-3 sm:py-2.5 px-4 rounded-lg w-full shadow transition ring-2 ring-[#c5a880]">➕ Registrar Lote</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div id="pestaana-faena" class="seccion-proceso space-y-4 hidden">
+      <form id="form-faena" class="bg-[#ffffff] p-3 sm:p-4 rounded-xl border border-[#e2ded6] border-t-4 border-[#1b4332] space-y-3 shadow-sm">
+        <h3 class="text-base sm:text-lg font-bold text-[#1b4332] flex items-center gap-1"><span class="text-[#c5a880]">🔥</span> Registro de Faena Caliente</h3>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-[#2c3e50] mb-1">Seleccionar Lote Activo</label>
+            <select id="faena-lote-select" class="border border-[#e2ded6] p-2.5 rounded-lg w-full bg-stone-50 font-bold text-[#2c3e50] shadow-sm"></select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-[#2c3e50] mb-1">Peso Total Caliente (Kg)</label>
+            <input type="number" id="faena-kg-caliente" step="0.01" placeholder="Ej: 1749.7" class="border border-[#e2ded6] p-2.5 rounded-lg w-full shadow-sm" required="">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-stone-50 p-3 rounded-xl border border-[#e2ded6]">
+          <div>
+            <label class="block text-xs font-bold text-red-700 mb-1">Rebaja: Alimento (Kg)</label>
+            <input type="number" id="rebaja-alimento" value="0" step="0.01" class="border border-[#e2ded6] p-2.5 rounded-lg w-full shadow-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-red-700 mb-1">Rebaja: Placenta (Kg)</label>
+            <input type="number" id="rebaja-placenta" value="0" step="0.01" class="border border-[#e2ded6] p-2.5 rounded-lg w-full shadow-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-red-700 mb-1">Rebaja: Sanidad/Decomiso (Kg)</label>
+            <input type="number" id="rebaja-sanidad" value="0" step="0.01" class="border border-[#e2ded6] p-2.5 rounded-lg w-full shadow-sm">
+          </div>
+        </div>
+
+        <div class="flex items-end">
+          <button type="submit" class="bg-[#1b4332] hover:bg-[#143225] text-white font-bold py-3 sm:py-2.5 px-4 rounded-lg w-full shadow transition ring-2 ring-[#c5a880]">🔥 Guardar Caliente</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="pestaana-despacho" class="seccion-proceso space-y-4 hidden">
+      <div class="bg-[#ffffff] p-3 sm:p-4 rounded-xl border border-[#e2ded6] border-t-4 border-[#1b4332] space-y-3 shadow-sm">
+        <h3 class="text-base sm:text-lg font-bold text-[#1b4332] flex items-center gap-1"><span class="text-[#c5a880]">❄️</span> Día de Despacho y Carga Unificada</h3>
+        <p class="text-xs text-stone-500">Seleccione los lotes listos en cava para consolidarlos en un solo pesaje de salida (permite despachos parciales por cantidad de animales).</p>
+        
+        <div class="overflow-x-auto rounded-lg border border-[#e2ded6]">
+          <table class="table-auto w-full text-left min-w-[750px]">
+            <thead class="bg-[#e2ded6] text-xs font-bold text-[#2c3e50]">
+              <tr>
+                <th class="p-2.5 text-center">Sel.</th>
+                <th class="p-2.5">Lote</th>
+                <th class="p-2.5">Proveedor</th>
+                <th class="p-2.5">Tipo</th>
+                <th class="p-2.5">Disponibles (Unds)</th>
+                <th class="p-2.5">Unds a Despachar</th>
+                <th class="p-2.5">Kg Neto Pie</th>
+                <th class="p-2.5">Kg Caliente</th>
+                <th class="p-2.5">Estado / Restantes</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-despacho-seleccion" class="text-sm divide-y divide-[#e2ded6]"></tbody>
+          </table>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-stone-50 p-3 rounded-xl border border-[#e2ded6] mt-3">
+          <div>
+            <label class="block text-xs font-bold text-[#2c3e50] mb-1">Peso Frío Unificado (Kg)</label>
+            <input type="number" id="despacho-kg-frio" step="0.01" placeholder="Ej: Peso báscula salida" class="border border-[#e2ded6] p-2.5 rounded-lg w-full shadow-sm" required="">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-[#2c3e50] mb-1">Destino Carga</label>
+            <input type="text" id="despacho-destino" placeholder="Ej: Planta Desposte / Cliente" class="border border-[#e2ded6] p-2.5 rounded-lg w-full shadow-sm" required="">
+          </div>
+          <div class="flex items-end">
+            <button type="button" onclick="procesarDespachoUnificado()" class="bg-[#1b4332] hover:bg-[#143225] text-white font-bold py-3 sm:py-2.5 px-4 rounded-lg w-full shadow transition ring-2 ring-[#c5a880]">❄️ Procesar Despacho</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 border-t border-[#e2ded6] pt-4">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-3">
+        <h2 class="text-lg sm:text-xl font-bold text-[#1b4332]">📈 Panel de Control de Lotes</h2>
+        <button onclick="exportarExcel()" class="w-full sm:w-auto bg-[#2d6a4f] hover:bg-[#1b4332] text-white text-xs font-bold py-2.5 px-4 rounded-lg shadow flex items-center justify-center gap-1 transition">
+          📊 Exportar a Excel
+        </button>
+      </div>
+
+      <div class="overflow-x-auto rounded-xl border border-[#e2ded6] shadow-inner bg-stone-50">
+        <table class="table-auto w-full text-left min-w-[1100px] border-collapse">
+          <thead class="bg-[#1b4332] text-white text-xs sticky top-0">
+            <tr>
+              <th class="p-2 border border-[#e2ded6]/30 text-center align-middle">Lote</th>
+              <th class="p-2 border border-[#e2ded6]/30 text-center align-middle">Fecha</th>
+              <th class="p-2 border border-[#e2ded6]/30 text-center align-middle">Proveedor</th>
+              <th class="p-2 border border-[#e2ded6]/30 text-center align-middle">Tipo</th>
+              <th class="p-2 border border-[#e2ded6]/30 text-center align-middle">Unds (Disp/Total)</th>
+              <th class="p-2 border border-[#e2ded6]/30 text-center align-middle">Kg Neto Pie</th>
+              <th class="p-2 border border-[#e2ded6]/30 text-center align-middle">Costo Compra</th>
+              <th class="p-2 border border-[#e2ded6]/30 text-center align-middle">Gasto Matanza</th>
+              <th class="p-2 border border-[#e2ded6]/30 text-center align-middle">Gasto Flete</th>
+              <th class="p-2 border border-[#e2ded6]/30 text-center align-middle">Gasto Operativos</th>
+              <th class="p-2 border border-[#e2ded6]/30 text-center align-middle">Total Gastos</th>
+              <th class="p-2 border border-[#e2ded6]/30 text-center align-middle">Costo Estructural</th>
+              <th class="p-2 border border-[#e2ded6]/30 text-center align-middle">Kg Caliente</th>
+              <th class="p-2 border border-[#e2ded6]/30 text-center align-middle">Kg Frío</th>
+              <th class="p-2 border border-[#e2ded6]/30 text-center align-middle">Estatus</th>
+              <th class="p-2 border border-[#e2ded6]/30 text-center align-middle">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-lotes-principal" class="text-xs divide-y divide-[#e2ded6]"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="seccion-informe-impresion" class="mt-6 p-3 sm:p-4 bg-[#ffffff] border border-[#c5a880] rounded-xl shadow-sm">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-2">
+        <h3 class="text-base sm:text-lg font-bold text-[#1b4332] flex items-center gap-1"><span class="text-[#c5a880]">🤖</span> Informe Operacional S.I.P.MA</h3>
+        <button onclick="imprimirInforme()" class="no-print w-full sm:w-auto bg-[#1b4332] hover:bg-[#143225] text-white text-xs font-bold py-2 px-3 rounded-lg shadow flex items-center justify-center gap-1 transition">
+          🖨️ Imprimir Informe
+        </button>
+      </div>
+      <div id="informe-ia-pantalla" class="text-xs sm:text-sm mt-2 text-[#2c3e50] whitespace-pre-line font-mono bg-stone-50 p-3 rounded-lg border border-[#e2ded6] leading-relaxed overflow-x-auto">No hay informe generado. Seleccione o procese un lote para visualizar el informe aquí.</div>
+    </div>
+
+    <div class="mt-6 bg-[#f4f1ea] p-3 sm:p-4 rounded-xl border border-[#e2ded6] flex flex-col sm:flex-row items-center justify-between gap-3 shadow-sm">
+      <div class="text-center sm:text-left">
+        <h4 class="text-sm font-bold text-[#1b4332]">🗄️ Respaldo de Datos Internos</h4>
+        <p class="text-xs text-[#2c3e50] opacity-80">Descargue o suba el archivo .json para resguardar o transferir la base de datos.</p>
+      </div>
+      <div class="flex w-full sm:w-auto gap-2">
+        <button onclick="guardarBackupFichero()" class="flex-1 sm:flex-none bg-[#2c3e50] hover:bg-[#1b4332] hover:border-[#c5a880] text-white text-xs font-bold py-2.5 px-3 rounded-lg border border-transparent transition">Guardar Backup</button>
+        <label class="flex-1 sm:flex-none bg-[#2c3e50] hover:bg-[#1b4332] hover:border-[#c5a880] text-white text-xs font-bold py-2.5 px-3 rounded-lg cursor-pointer text-center border border-transparent transition">
+          Cargar Backup
+          <input type="file" id="input-archivo-backup" accept=".json" class="hidden" onchange="cargarBackupFichero(event)">
+        </label>
+      </div>
+    </div>
+
+    <div class="mt-6 border-t border-[#e2ded6] pt-4 flex flex-col sm:flex-row justify-between items-center text-xs text-[#2c3e50] opacity-80 gap-2">
+      <div class="flex items-center space-x-2">
+        <button onclick="eliminarTodoConClave()" class="text-2xl p-1 hover:scale-110 transition" title="Limpieza de Datos (Clave: 13625669)">🧹</button>
+        <p class="font-bold text-center sm:text-left">Sistema Creado por <span class="font-bold text-[#1b4332]">ConsulTek</span> — Charlie Graterol 🇻🇪 (0412) 6906641 y por IA 🤖</p>
+      </div>
+      <div class="text-center sm:text-right font-semibold text-[#2c3e50]">
+        S.I.P.MA © 2026
+      </div>
+    </div>
+
+  </div>
+
+  <div id="modal-edicion" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-3">
+    <div class="bg-white rounded-2xl p-4 sm:p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl space-y-4 border border-[#e2ded6]">
+      <div class="flex justify-between items-center border-b border-[#e2ded6] pb-3">
+        <h3 class="text-lg font-bold text-[#1b4332]">✏️ Editar Lote en Caliente</h3>
+        <button onclick="cerrarModalEdicion()" class="text-stone-500 hover:text-stone-800 font-bold text-lg">✕</button>
+      </div>
+      <form id="form-editar-lote" class="space-y-3">
+        <input type="hidden" id="edit-codigo-original">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-[#2c3e50] mb-1">Matanza ($/Cabeza)</label>
+            <input type="number" id="edit-matanza" step="0.01" class="border border-[#e2ded6] p-2.5 rounded-lg w-full shadow-sm" required="">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-[#2c3e50] mb-1">Gastos Operativos ($)</label>
+            <input type="number" id="edit-operativos" step="0.01" class="border border-[#e2ded6] p-2.5 rounded-lg w-full shadow-sm" required="">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-[#2c3e50] mb-1">Flete / Transporte ($)</label>
+            <input type="number" id="edit-transporte" step="0.01" class="border border-[#e2ded6] p-2.5 rounded-lg w-full shadow-sm" required="">
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-[#2c3e50] mb-1">Unidades (Cabezas)</label>
+            <input type="number" id="edit-unidades" class="border border-[#e2ded6] p-2.5 rounded-lg w-full shadow-sm" required="">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-[#2c3e50] mb-1">Pesada Inicial (Kg Vivo)</label>
+            <input type="number" id="edit-kg-inicial" step="0.01" class="border border-[#e2ded6] p-2.5 rounded-lg w-full shadow-sm" required="">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-[#2c3e50] mb-1">Precio Compra ($/Kg)</label>
+            <input type="number" id="edit-precio-compra" step="0.01" class="border border-[#e2ded6] p-2.5 rounded-lg w-full shadow-sm" required="">
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-stone-50 p-3 rounded-xl border border-[#e2ded6]">
+          <div>
+            <label class="block text-xs font-bold text-red-700 mb-1">Rebaja: Alimento (Kg)</label>
+            <input type="number" id="edit-rebaja-alimento" step="0.01" class="border border-[#e2ded6] p-2.5 rounded-lg w-full shadow-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-red-700 mb-1">Rebaja: Placenta (Kg)</label>
+            <input type="number" id="edit-rebaja-placenta" step="0.01" class="border border-[#e2ded6] p-2.5 rounded-lg w-full shadow-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-red-700 mb-1">Rebaja: Sanidad/Decomiso (Kg)</label>
+            <input type="number" id="edit-rebaja-sanidad" step="0.01" class="border border-[#e2ded6] p-2.5 rounded-lg w-full shadow-sm">
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-[#2c3e50] mb-1">Peso Caliente (Kg)</label>
+            <input type="number" id="edit-kg-caliente" step="0.01" class="border border-[#e2ded6] p-2.5 rounded-lg w-full shadow-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-[#2c3e50] mb-1">Peso Frío (Kg)</label>
+            <input type="number" id="edit-kg-frio" step="0.01" class="border border-[#e2ded6] p-2.5 rounded-lg w-full shadow-sm">
+          </div>
+        </div>
+        <div class="flex justify-end gap-2 pt-3 border-t border-[#e2ded6]">
+          <button type="button" onclick="cerrarModalEdicion()" class="bg-stone-300 hover:bg-stone-400 text-stone-800 font-bold py-2.5 px-4 rounded-lg">Cancelar</button>
+          <button type="submit" class="bg-[#1b4332] hover:bg-[#143225] text-white font-bold py-2.5 px-4 rounded-lg transition ring-2 ring-[#c5a880]">Guardar Cambios</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // FUNCIONES Y LÓGICA ESPECÍFICA DE LA PORTADA
+    function actualizarRelojPortada() {
+      const ahora = new Date();
+      const dia = String(ahora.getDate()).padStart(2, '0');
+      const mes = String(ahora.getMonth() + 1).padStart(2, '0');
+      const anio = ahora.getFullYear();
+      
+      const horas = String(ahora.getHours()).padStart(2, '0');
+      const minutos = String(ahora.getMinutes()).padStart(2, '0');
+      const segundos = String(ahora.getSeconds()).padStart(2, '0');
+
+      document.getElementById("portada-fecha").textContent = `${dia}/${mes}/${anio}`;
+      document.getElementById("portada-hora").textContent = `${horas}:${minutos}:${segundos}`;
+    }
+
+    function ingresarAlSistema(e) {
+      e.preventDefault();
+      const usuario = document.getElementById("portada-usuario").value.trim();
+      const correo = document.getElementById("portada-correo").value.trim();
+
+      if(usuario && correo) {
+        localStorage.setItem("sipma_usuario_activo", usuario);
+        localStorage.setItem("sipma_ultimo_correo", correo);
+        
+        document.getElementById("pantalla-portada").classList.add("hidden");
+        document.getElementById("contenedor-principal-sistema").classList.remove("hidden");
+      }
+    }
+
+    // LÓGICA MATRIZ DEL SISTEMA S.I.P.MA (CONSERVADA INTACATALMENTE)
+    let lotes = JSON.parse(localStorage.getItem("sipma_lotes_v1")) || [];
+    let proveedores = JSON.parse(localStorage.getItem("sipma_proveedores_v1")) || ["Distribuidora Pork C.A.", "Agropecuaria El Valle", "Morochos Ranchs", "Alejandro Mendoza"];
+
+    function guardarDatos() {
+      localStorage.setItem("sipma_lotes_v1", JSON.stringify(lotes));
+      localStorage.setItem("sipma_proveedores_v1", JSON.stringify(proveedores));
+    }
+
+    function cambiarPestaana(idPestaana) {
+      document.querySelectorAll('.seccion-proceso').forEach(seccion => seccion.classList.add('hidden'));
+      document.getElementById(idPestaana).classList.remove('hidden');
+      
+      ['gastos', 'faena', 'despacho'].forEach(p => {
+        const btn = document.getElementById(`btn-pestaana-${p}`);
+        if(`pestaana-${p}` === idPestaana) {
+          btn.className = "w-full py-3 sm:py-2 font-bold rounded-lg bg-[#1b4332] text-[#ffffff] transition text-center shadow-md";
+        } else {
+          btn.className = "w-full py-3 sm:py-2 font-bold rounded-lg text-[#2c3e50] bg-[#e2ded6] hover:bg-[#c5a880] hover:text-white transition text-center";
+        }
+      });
+      actualizarVistas();
+    }
+
+    function dispararRecalculoPorCambioGasto() {
+      const fecha = document.getElementById("gasto-fecha").value;
+      if(fecha) {
+        recalcularGastosDelDia(fecha);
+        guardarDatos();
+        actualizarVistas();
+      }
+    }
+
+    function recalcularGastosDelDia(fecha) {
+      lotes.forEach(l => {
+        if(l.fecha === fecha) {
+          l.totalGastosLote = (l.gastoMatanza || 0) + (l.gastoFlete || 0) + (l.gastoOperativos || 0);
+          l.totalCostoEstructural = (l.costoBaseLote || 0) + l.totalGastosLote;
+        }
+      });
+    }
+
+    // REGISTRO DE RECEPCIÓN
+    document.getElementById("form-crear-lote").addEventListener("submit", function(e) {
+      e.preventDefault();
+      
+      const fecha = document.getElementById("gasto-fecha").value;
+      if(!fecha) {
+        alert("❌ Seleccione la fecha del día en el bloque superior antes de registrar.");
+        return;
+      }
+
+      const codigo = document.getElementById("lote-codigo").value.trim().toUpperCase();
+      
+      if(lotes.some(l => l.codigo === codigo)) {
+        alert(`❌ El lote ${codigo} ya existe.`);
+        return;
+      }
+
+      const proveedor = document.getElementById("lote-proveedor").value.trim();
+      const tipo = document.getElementById("lote-tipo").value;
+      const unidades = parseInt(document.getElementById("lote-unidades").value) || 0;
+      const precioCompra = parseFloat(document.getElementById("lote-precio-compra").value) || 0;
+      const kgInicial = parseFloat(document.getElementById("lote-kg-inicial").value) || 0;
+      
+      const rAlimento = 0;
+      const rPlacenta = 0;
+      const rSanidad = 0;
+      const totalRebajas = 0;
+      const kgNetoVivo = kgInicial - totalRebajas;
+
+      if(!proveedores.includes(proveedor)) proveedores.push(proveedor);
+
+      const tasaMatanzaUnidad = parseFloat(document.getElementById("gasto-matanza").value) || 0;
+      const fleteInicial = parseFloat(document.getElementById("gasto-transporte").value) || 0;
+      const operativosInicial = parseFloat(document.getElementById("gasto-operativos").value) || 0;
+
+      const gastoMatanza = unidades * tasaMatanzaUnidad;
+      const gastoFlete = fleteInicial;
+      const gastoOperativos = operativosInicial;
+      const totalGastosLote = gastoMatanza + gastoFlete + gastoOperativos;
+      const costoBaseLote = kgNetoVivo * precioCompra;
+      const totalCostoEstructural = costoBaseLote + totalGastosLote;
+
+      const nuevoLote = {
+        codigo, fecha, proveedor, tipo, unidades, precioCompra, kgInicial,
+        rebajas: { alimento: rAlimento, placenta: rPlacenta, sanidad: rSanidad, total: totalRebajas },
+        kgNetoVivo,
+        costoBaseLote,
+        gastoMatanza, gastoFlete, gastoOperativos, totalGastosLote, totalCostoEstructural,
+        kgCaliente: 0, kgFrio: 0, estado: "Recepción", destino: "", 
+        unidadesDespachadas: 0, despachos: [], auditoria: []
+      };
+
+      lotes.push(nuevoLote);
+      guardarDatos();
+      actualizarVistas();
+      
+      document.getElementById("lote-codigo").value = "";
+      document.getElementById("lote-unidades").value = "";
+      document.getElementById("lote-kg-inicial").value = "";
+    });
+
+    // FAENA CALIENTE
+    document.getElementById("form-faena").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const codigoLote = document.getElementById("faena-lote-select").value;
+      const kgCaliente = parseFloat(document.getElementById("faena-kg-caliente").value) || 0;
+
+      const rAlimento = parseFloat(document.getElementById("rebaja-alimento").value) || 0;
+      const rPlacenta = parseFloat(document.getElementById("rebaja-placenta").value) || 0;
+      const rSanidad = parseFloat(document.getElementById("rebaja-sanidad").value) || 0;
+
+      if(!codigoLote) {
+        alert("❌ No hay lotes pendientes por faenar.");
+        return;
+      }
+
+      const lote = lotes.find(l => l.codigo === codigoLote);
+      if(lote) {
+        lote.kgCaliente = kgCaliente;
+        
+        const totalRebajas = rAlimento + rPlacenta + rSanidad;
+        lote.rebajas = { alimento: rAlimento, placenta: rPlacenta, sanidad: rSanidad, total: totalRebajas };
+        
+        lote.kgNetoVivo = lote.kgInicial - totalRebajas;
+        lote.costoBaseLote = lote.kgNetoVivo * lote.precioCompra;
+        lote.totalCostoEstructural = lote.costoBaseLote + lote.totalGastosLote;
+
+        lote.estado = "Faenado";
+        guardarDatos();
+        actualizarVistas();
+        alert(`🔥 Lote ${codigoLote} actualizado en caliente.`);
+        
+        document.getElementById("faena-kg-caliente").value = "";
+        document.getElementById("rebaja-alimento").value = "0";
+        document.getElementById("rebaja-placenta").value = "0";
+        document.getElementById("rebaja-sanidad").value = "0";
+      }
+    });
+
+    // UNIFICACIÓN EN DESPACHO (PARCIAL POR UNIDADES)
+    function procesarDespachoUnificado() {
+      const checkboxes = document.querySelectorAll(".chk-despacho:checked");
+      const kgFrioTotalEntrada = parseFloat(document.getElementById("despacho-kg-frio").value) || 0;
+      const destino = document.getElementById("despacho-destino").value.trim();
+
+      if(checkboxes.length === 0) {
+        alert("❌ Seleccione al menos un lote para el despacho.");
+        return;
+      }
+      if(kgFrioTotalEntrada <= 0 || !destino) {
+        alert("❌ Ingrese Peso Frío de Báscula y Destino válidos.");
+        return;
+      }
+
+      let datosDespachoLotes = [];
+      let errorValidacion = false;
+
+      checkboxes.forEach(cb => {
+        const codigo = cb.value;
+        const lote = lotes.find(l => l.codigo === codigo);
+        const undsRestantes = lote.unidades - (lote.unidadesDespachadas || 0);
+        const inputUnds = document.getElementById(`despacho-unds-${codigo}`);
+        const undsADespachar = parseInt(inputUnds.value) || 0;
+
+        if(undsADespachar <= 0 || undsADespachar > undsRestantes) {
+          alert(`❌ Cantidad de unidades a despachar inválida para el lote ${codigo}. Disponibles en cava: ${undsRestantes}`);
+          errorValidacion = true;
+          return;
+        }
+
+        const kgCalienteLote = lote.kgCaliente || 0;
+        const kgCalienteAsignado = lote.unidades > 0 ? (kgCalienteLote / lote.unidades) * undsADespachar : 0;
+
+        datosDespachoLotes.push({
+          lote,
+          undsADespachar,
+          kgCalienteAsignado
+        });
+      });
+
+      if(errorValidacion) return;
+
+      // Validación de Consistencia Lógica
+      const totalUndsConfirmacion = datosDespachoLotes.reduce((sum, d) => sum + d.undsADespachar, 0);
+      const pesoPromedioPrevio = totalUndsConfirmacion > 0 ? (kgFrioTotalEntrada / totalUndsConfirmacion) : 0;
+
+      if (totalUndsConfirmacion > 0 && (pesoPromedioPrevio < 50 || pesoPromedioPrevio > 140)) {
+        const formatearNumeroConfirm = (num) => {
+            let partes = num.toFixed(2).split(".");
+            partes[0] = partes[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            return partes.join(",");
+        };
+        const promStr = formatearNumeroConfirm(pesoPromedioPrevio);
+        const pesoStr = formatearNumeroConfirm(kgFrioTotalEntrada);
+        
+        let confirmacion = confirm(`⚠️ ALERTA DE CONSISTENCIA S.I.P.MA: El peso promedio resultante es de ${promStr} Kg/Animal para ${totalUndsConfirmacion} unidades y ${pesoStr} Kg. Esto parece un error de unidades o inventario no descontado. ¿Desea proceder de todos modos o revisar los datos?`);
+        
+        if (!confirmacion) {
+          return;
+        }
+      }
+
+      const totalKgCalienteGrupo = datosDespachoLotes.reduce((sum, d) => sum + d.kgCalienteAsignado, 0);
+
+      let lotesReporte = [];
+      datosDespachoLotes.forEach(d => {
+        const l = d.lote;
+        const undsADespachar = d.undsADespachar;
+        
+        l.unidadesDespachadas = (l.unidadesDespachadas || 0) + undsADespachar;
+
+        const kgFrioAsignado = totalKgCalienteGrupo > 0 ? (d.kgCalienteAsignado / totalKgCalienteGrupo) * kgFrioTotalEntrada : (kgFrioTotalEntrada / datosDespachoLotes.length);
+        
+        l.kgFrio = (l.kgFrio || 0) + kgFrioAsignado;
+
+        if(!l.despachos) l.despachos = [];
+        l.despachos.push({
+          fecha: new Date().toISOString().replace('T', ' ').slice(0, 19),
+          destino: destino,
+          unidadesDespachadas: undsADespachar,
+          kgFrioDespachado: kgFrioAsignado
+        });
+
+        if(l.unidadesDespachadas >= l.unidades) {
+          l.estado = "Despachado";
+          l.destino = destino;
+        } else {
+          l.estado = "Faenado";
+          l.destino = destino;
+        }
+
+        lotesReporte.push(l);
+      });
+
+      guardarDatos();
+      actualizarVistas();
+      generarReporteIA(lotesReporte, kgFrioTotalEntrada, destino);
+      
+      document.getElementById("despacho-kg-frio").value = "";
+      document.getElementById("despacho-destino").value = "";
+    }
+
+    function generarReporteIA(lotesGrupo, kgFrioTotal, destino) {
+      const sumKgFrioTotalLotes = lotesGrupo.reduce((sum, l) => sum + (l.kgFrio || 0), 0);
+      const esReporteGlobal = (Math.abs(kgFrioTotal - sumKgFrioTotalLotes) < 0.1) || (kgFrioTotal === 0 && sumKgFrioTotalLotes === 0);
+
+      const totalUndsDespachadas = lotesGrupo.reduce((sum, l) => {
+        if (esReporteGlobal && l.unidadesDespachadas > 0) {
+          return sum + l.unidadesDespachadas;
+        } else {
+          let ultimoDespacho = l.despachos && l.despachos.length > 0 ? l.despachos[l.despachos.length - 1].unidadesDespachadas : l.unidades;
+          return sum + ultimoDespacho;
+        }
+      }, 0);
+
+      const totalKgNetoPie = lotesGrupo.reduce((sum, l) => sum + l.kgNetoVivo, 0);
+      const totalKgCaliente = lotesGrupo.reduce((sum, l) => sum + l.kgCaliente, 0);
+      const totalInversionEstructural = lotesGrupo.reduce((sum, l) => sum + l.totalCostoEstructural, 0);
+
+      const rendimientoCaliente = totalKgNetoPie > 0 ? (totalKgCaliente / totalKgNetoPie) * 100 : 0;
+      const rendimientoFrio = totalKgNetoPie > 0 ? (kgFrioTotal / totalKgNetoPie) * 100 : 0;
+      const mermaEnfriamiento = totalKgCaliente > 0 ? ((totalKgCaliente - kgFrioTotal) / totalKgCaliente) * 100 : 0;
+      const costoKgFrioReal = kgFrioTotal > 0 ? (totalInversionEstructural / kgFrioTotal) : 0;
+
+      let kgPieRealmenteInvolucrado = 0;
+      let kgCalienteRealmenteInvolucrado = 0;
+      
+      lotesGrupo.forEach(l => {
+        let undsEnEsteEvento = 0;
+        if (esReporteGlobal && l.unidadesDespachadas > 0) {
+          undsEnEsteEvento = l.unidadesDespachadas;
+        } else {
+          undsEnEsteEvento = l.despachos && l.despachos.length > 0 ? l.despachos[l.despachos.length - 1].unidadesDespachadas : l.unidades;
+        }
+        let proporcion = l.unidades > 0 ? (undsEnEsteEvento / l.unidades) : 0;
+        kgPieRealmenteInvolucrado += (l.kgNetoVivo * proporcion);
+        kgCalienteRealmenteInvolucrado += (l.kgCaliente * proporcion);
+      });
+
+      const promPie = totalUndsDespachadas > 0 ? (kgPieRealmenteInvolucrado / totalUndsDespachadas) : 0;
+      const promCaliente = totalUndsDespachadas > 0 ? (kgCalienteRealmenteInvolucrado / totalUndsDespachadas) : 0;
+      const promFrio = totalUndsDespachadas > 0 ? (kgFrioTotal / totalUndsDespachadas) : 0;
+
+      const formatearNumero = (num) => {
+          let partes = num.toFixed(2).split(".");
+          partes[0] = partes[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+          return partes.join(",");
+      };
+
+      let detallesDespachos = lotesGrupo.map(l => {
+        if (l.despachos && l.despachos.length > 0) {
+          return l.despachos.map(d => `${d.unidadesDespachadas} ${l.tipo} / ${formatearNumero(d.kgFrioDespachado || l.kgFrio || 0)} KG / ${d.destino}`).join("\n");
+        } else {
+          let unds = l.unidadesDespachadas || l.unidades;
+          let kgF = l.kgFrio || l.kgCaliente || 0;
+          let dest = l.destino || destino || 'N/A';
+          return `${unds} ${l.tipo} / ${formatearNumero(kgF)} KG / ${dest}`;
+        }
+      }).join("\n");
+      
+      let auditoriasGrupo = lotesGrupo.filter(l => l.auditoria && l.auditoria.length > 0)
+        .map(l => ` • Lote ${l.codigo}:\n` + l.auditoria.map(a => `   - [${a.fecha}] Motivo: ${a.motivo}`).join("\n")).join("\n");
+      if(!auditoriasGrupo) auditoriasGrupo = " • Sin enmiendas registradas.";
+
+      const hoy = new Date();
+      const fechaHoyStr = `${String(hoy.getDate()).padStart(2, '0')}/${String(hoy.getMonth() + 1).padStart(2, '0')}/${hoy.getFullYear()}`;
+
+      let stringReporte = `📊 INFORME DE DESPACHO PARCIAL / LOTE - S.I.P.MA    - FECHA : ${fechaHoyStr}
+-------------------------------------------------------------------------
+⚖️ BALANCE DE ANIMALES   (LOTE COMPLETO / BATCH):
+- Peso Neto Vivo (Pie):    ${totalKgNetoPie.toFixed(2)} Kg
+- Peso Canal Caliente:    ${totalKgCaliente.toFixed(2)} Kg
+- Peso Frío Despacho:     ${kgFrioTotal.toFixed(2)} Kg
+-------------------------------------------------------------------------
+📈 INDICADORES DE RENDIMIENTO:
+- Rendimiento Caliente:    ${rendimientoCaliente.toFixed(2)} %
+- Rendimiento Frío Total:   ${rendimientoFrio.toFixed(2)} %
+- Merma por Enfriamiento:  ${mermaEnfriamiento.toFixed(2)} %
+-------------------------------------------------------------------------
+ 🐷PESO PROMEDIOS POR ETAPA :
+- Peso Promedio en Pie:          ${formatearNumero(promPie)} Kg / Animal
+- Peso Promedio Canal Caliente:  ${formatearNumero(promCaliente)} Kg / Animal
+- Peso Promedio Canal Frío:      ${formatearNumero(promFrio)} Kg / Animal
+-------------------------------------------------------------------------
+🚛 INDICADORES DE RELACIÓN DE DESPACHO:
+${detallesDespachos}
+-------------------------------------------------------------------------
+💵 COSTO REAL DE SALIDA EN FRÍO:
+- Inversión Estructural:   $ ${totalInversionEstructural.toFixed(2)}
+- Costo Real Kg Frío:      $ ${costoKgFrioReal.toFixed(2)} / Kg Frío
+-------------------------------------------------------------------------
+📝 AUDITORÍA DE ENMIENDAS / MODIFICACIONES:${auditoriasGrupo}
+-------------------------------------------------------------------------
+<div class="flex flex-col space-y-0.5 mt-2">
+  <span class="text-sm font-bold text-[#1b4332]">ConsulTek <span class="text-[#c5a880]">✦</span></span>
+  <span class="italic text-xs text-[#2c3e50]">Donde los números cobran sentido y las oportunidades se convierten en resultados.</span>
+  <span class="text-xs font-bold text-[#1b4332]">WhatsApp: 0424-4073329 // 0412-7465757</span>
+</div>
+`
+
+      document.getElementById("informe-ia-pantalla").innerHTML = stringReporte;
+    }
+
+    function imprimirInforme() {
+      window.print();
+    }
+
+    function verInformeLote(codigo) {
+      const lote = lotes.find(l => l.codigo === codigo);
+      if(!lote) return;
+      const kgFrioRef = lote.kgFrio > 0 ? lote.kgFrio : (lote.kgCaliente > 0 ? lote.kgCaliente : 0);
+      generarReporteIA([lote], kgFrioRef, lote.destino || lote.estado);
+      document.getElementById("informe-ia-pantalla").scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // ACCIONES DE EDICIÓN Y ELIMINACIÓN DE LOTES
+    function abrirModalEdicion(codigo) {
+      const lote = lotes.find(l => l.codigo === codigo);
+      if(!lote) return;
+
+      document.getElementById("edit-codigo-original").value = lote.codigo;
+      document.getElementById("edit-unidades").value = lote.unidades;
+      document.getElementById("edit-kg-inicial").value = lote.kgInicial;
+      document.getElementById("edit-precio-compra").value = lote.precioCompra;
+      document.getElementById("edit-rebaja-alimento").value = lote.rebajas.alimento;
+      document.getElementById("edit-rebaja-placenta").value = lote.rebajas.placenta;
+      document.getElementById("edit-rebaja-sanidad").value = lote.rebajas.sanidad;
+      document.getElementById("edit-kg-caliente").value = lote.kgCaliente;
+      document.getElementById("edit-kg-frio").value = lote.kgFrio;
+
+      let tasaMatanzaUni = lote.unidades > 0 ? (lote.gastoMatanza / lote.unidades) : 0;
+      document.getElementById("edit-matanza").value = tasaMatanzaUni.toFixed(2);
+      document.getElementById("edit-operativos").value = lote.gastoOperativos.toFixed(2);
+      document.getElementById("edit-transporte").value = lote.gastoFlete.toFixed(2);
+
+      document.getElementById("modal-edicion").classList.remove("hidden");
+    }
+
+    function cerrarModalEdicion() {
+      document.getElementById("modal-edicion").classList.add("hidden");
+    }
+
+    document.getElementById("form-editar-lote").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const codigoOriginal = document.getElementById("edit-codigo-original").value;
+      let motivo = prompt("⚠️ Ingrese obligatoriamente el motivo de la modificación para la Auditoría de Enmiendas:");
+      if (!motivo || motivo.trim() === "") {
+        alert("❌ Debe ingresar un motivo válido para guardar los cambios.");
+        return;
+      }
+
+      const lote = lotes.find(l => l.codigo === codigoOriginal);
+      if (!lote) return;
+
+      lote.unidades = parseInt(document.getElementById("edit-unidades").value) || 0;
+      if((lote.unidadesDespachadas || 0) > lote.unidades) {
+        lote.unidadesDespachadas = lote.unidades;
+      }
+      if(lote.unidadesDespachadas < lote.unidades && lote.estado === "Despachado") {
+        lote.estado = "Faenado";
+      }
+
+      lote.kgInicial = parseFloat(document.getElementById("edit-kg-inicial").value) || 0;
+      lote.precioCompra = parseFloat(document.getElementById("edit-precio-compra").value) || 0;
+      
+      const rAlimento = parseFloat(document.getElementById("edit-rebaja-alimento").value) || 0;
+      const rPlacenta = parseFloat(document.getElementById("edit-rebaja-placenta").value) || 0;
+      const rSanidad = parseFloat(document.getElementById("edit-rebaja-sanidad").value) || 0;
+      lote.rebajas = { alimento: rAlimento, placenta: rPlacenta, sanidad: rSanidad, total: (rAlimento + rPlacenta + rSanidad) };
+      lote.kgNetoVivo = lote.kgInicial - lote.rebajas.total;
+      lote.costoBaseLote = lote.kgNetoVivo * lote.precioCompra;
+
+      const tasaMatanza = parseFloat(document.getElementById("edit-matanza").value) || 0;
+      lote.gastoMatanza = lote.unidades * tasaMatanza;
+      lote.gastoOperativos = parseFloat(document.getElementById("edit-operativos").value) || 0;
+      lote.gastoFlete = parseFloat(document.getElementById("edit-transporte").value) || 0;
+      
+      lote.totalGastosLote = lote.gastoMatanza + lote.gastoFlete + lote.gastoOperativos;
+      lote.totalCostoEstructural = lote.costoBaseLote + lote.totalGastosLote;
+
+      lote.kgCaliente = parseFloat(document.getElementById("edit-kg-caliente").value) || 0;
+      lote.kgFrio = parseFloat(document.getElementById("edit-kg-frio").value) || 0;
+
+      if (!lote.auditoria) lote.auditoria = [];
+      lote.auditoria.push({
+        fecha: new Date().toISOString().replace('T', ' ').slice(0, 19),
+        motivo: motivo.trim()
+      });
+
+      guardarDatos();
+      actualizarVistas();
+      cerrarModalEdicion();
+      alert(`✅ Lote ${codigoOriginal} actualizado con éxito.`);
+    });
+
+    function eliminarLote(codigo) {
+      if(confirm(`🚨 ¿Está seguro que desea eliminar el lote ${codigo}?`)) {
+        lotes = lotes.filter(l => l.codigo !== codigo);
+        guardarDatos();
+        actualizarVistas();
+        alert(`🗑️ Lote ${codigo} eliminado con éxito.`);
+      }
+    }
+
+    function actualizarVistas() {
+      const dl = document.getElementById("lista-proveedores");
+      dl.innerHTML = "";
+      proveedores.forEach(p => dl.innerHTML += `<option value="${p}">`);
+
+      const selectFaena = document.getElementById("faena-lote-select");
+      selectFaena.innerHTML = "";
+      lotes.filter(l => l.estado === "Recepción").forEach(l => {
+        selectFaena.innerHTML += `<option value="${l.codigo}">${l.codigo} — ${l.proveedor} (${l.unidades} ${l.tipo})</option>`;
+      });
+
+      const tbodyDespacho = document.getElementById("tabla-despacho-seleccion");
+      tbodyDespacho.innerHTML = "";
+      lotes.filter(l => l.estado === "Faenado" && (l.unidades - (l.unidadesDespachadas || 0)) > 0).forEach(l => {
+        let undsRestantes = l.unidades - (l.unidadesDespachadas || 0);
+        tbodyDespacho.innerHTML += `
+          <tr class="border-b border-[#e2ded6] hover:bg-stone-100">
+            <td class="p-2.5 text-center"><input type="checkbox" class="chk-despacho h-5 w-5" value="${l.codigo}"></td>
+            <td class="p-2.5 font-bold">${l.codigo}</td>
+            <td class="p-2.5">${l.proveedor}</td>
+            <td class="p-2.5">${l.tipo}</td>
+            <td class="p-2.5 font-bold text-amber-700">${undsRestantes} / ${l.unidades}</td>
+            <td class="p-2.5">
+              <input type="number" id="despacho-unds-${l.codigo}" value="${undsRestantes}" min="1" max="${undsRestantes}" class="border border-[#e2ded6] p-1.5 rounded w-24 text-center font-bold bg-white shadow-sm" placeholder="Unds">
+            </td>
+            <td class="p-2.5">${l.kgNetoVivo.toFixed(2)} Kg</td>
+            <td class="p-2.5">${l.kgCaliente > 0 ? l.kgCaliente.toFixed(2) + ' Kg' : '-'}</td>
+            <td class="p-2.5"><span class="px-2 py-0.5 bg-amber-100 text-amber-800 rounded text-xs font-bold">En Cava (Restantes: ${undsRestantes})</span></td>
+          </tr>
+        `;
+      });
+
+      const tbodyPrincipal = document.getElementById("tabla-lotes-principal");
+      tbodyPrincipal.innerHTML = "";
+      lotes.forEach(l => {
+        let classColorPastel = l.tipo === "Cerdos" ? "bg-emerald-50 text-emerald-950" : "bg-rose-50 text-rose-950";
+        
+        let undsRest = l.unidades - (l.unidadesDespachadas || 0);
+        let badgeEstatus = `<span class="px-2 py-0.5 bg-gray-200 text-gray-700 rounded font-bold">Recepción</span>`;
+        if(l.estado === "Faenado") {
+          if((l.unidadesDespachadas || 0) > 0 && undsRest > 0) {
+            badgeEstatus = `<span class="px-2 py-0.5 bg-yellow-400 text-stone-900 rounded font-bold">🔥 Caliente (Parcial: ${undsRest} rest.)</span>`;
+          } else {
+            badgeEstatus = `<span class="px-2 py-0.5 bg-yellow-400 text-stone-900 rounded font-bold">🔥 Caliente</span>`;
+          }
+        }
+        if(l.estado === "Despachado") badgeEstatus = `<span class="px-2 py-0.5 bg-blue-600 text-white rounded font-bold">❄️ Despachado (0 rest.)</span>`;
+
+        tbodyPrincipal.innerHTML += `
+          <tr class="${classColorPastel} border-b border-[#e2ded6]">
+            <td class="p-2 font-bold border-r border-[#e2ded6] text-center align-middle">${l.codigo}</td>
+            <td class="p-2 border-r border-[#e2ded6] text-center align-middle">${l.fecha}</td>
+            <td class="p-2 font-medium border-r border-[#e2ded6] text-center align-middle">${l.proveedor}</td>
+            <td class="p-2 font-bold border-r border-[#e2ded6] text-center align-middle">${l.tipo}</td>
+            <td class="p-2 font-bold border-r border-[#e2ded6] text-center align-middle">${undsRest} / ${l.unidades}</td>
+            <td class="p-2 font-semibold border-r border-[#e2ded6] text-center align-middle">${l.kgNetoVivo.toFixed(2)} Kg</td>
+            <td class="p-2 border-r border-[#e2ded6] text-stone-600 text-center align-middle">$ ${l.costoBaseLote.toFixed(2)}</td>
+            <td class="p-2 border-r border-[#e2ded6] text-stone-600 text-center align-middle">$ ${l.gastoMatanza.toFixed(2)}</td>
+            <td class="p-2 border-r border-[#e2ded6] text-stone-600 text-center align-middle">$ ${l.gastoFlete.toFixed(2)}</td>
+            <td class="p-2 border-r border-[#e2ded6] text-stone-600 text-center align-middle">$ ${l.gastoOperativos.toFixed(2)}</td>
+            <td class="p-2 font-bold text-amber-700 border-r border-[#e2ded6] text-center align-middle">$ ${l.totalGastosLote.toFixed(2)}</td>
+            <td class="p-2 font-black text-stone-900 border-r border-[#e2ded6] bg-opacity-30 bg-stone-300 text-center align-middle">$ ${l.totalCostoEstructural.toFixed(2)}</td>
+            <td class="p-2 border-r border-[#e2ded6] text-center align-middle">${l.kgCaliente > 0 ? l.kgCaliente.toFixed(2) + ' Kg' : '-'}</td>
+            <td class="p-2 font-bold text-blue-700 border-r border-[#e2ded6] text-center align-middle">${l.kgFrio > 0 ? l.kgFrio.toFixed(2) + ' Kg' : '-'}</td>
+            <td class="p-2 text-center align-middle border-r border-[#e2ded6]">${badgeEstatus}</td>
+            <td class="p-2 text-center align-middle flex justify-center items-center gap-1">
+              <button onclick="verInformeLote('${l.codigo}')" class="bg-stone-700 hover:bg-stone-800 text-white p-1 rounded text-xs font-bold shadow transition" title="Informe Lote">📋</button>
+              <button onclick="abrirModalEdicion('${l.codigo}')" class="bg-amber-500 hover:bg-amber-600 text-white p-1 rounded text-xs font-bold shadow transition" title="Editar Lote">✏️</button>
+              <button onclick="eliminarLote('${l.codigo}')" class="bg-rose-500 hover:bg-rose-600 text-white p-1 rounded text-xs font-bold shadow transition" title="Eliminar Lote">🗑️</button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    // EXPORTACIÓN A EXCEL
+    function exportarExcel() {
+      let ultimoCorreo = localStorage.getItem("sipma_ultimo_correo") || "";
+      let correo = prompt("Ingrese su dirección de correo electrónico para el registro de exportación:", ultimoCorreo);
+      
+      if (correo === null) return;
+      localStorage.setItem("sipma_ultimo_correo", correo);
+
+      let dataJson = lotes.map(l => ({
+        "Código Lote": l.codigo,
+        "Fecha Proceso": l.fecha,
+        "Proveedor": l.proveedor,
+        "Tipo de Animal": l.tipo,
+        "Unidades Totales": l.unidades,
+        "Unidades Despachadas": l.unidadesDespachadas || 0,
+        "Unidades Restantes Cava": l.unidades - (l.unidadesDespachadas || 0),
+        "Kg Inicial Recepción": l.kgInicial,
+        "Total Rebajas (Kg)": l.rebajas.total,
+        "Kg Neto en Pie": l.kgNetoVivo,
+        "Costo Compra Lote ($)": l.costoBaseLote,
+        "Gasto Matanza ($)": l.gastoMatanza,
+        "Gasto Flete ($)": l.gastoFlete,
+        "Gasto Operativos ($)": l.gastoOperativos,
+        "Acumulado Gastos Prorrateados ($)": l.totalGastosLote,
+        "Costo Estructural Total ($)": l.totalCostoEstructural,
+        "Peso Caliente (Kg)": l.kgCaliente || 0,
+        "Peso Frío Acumulado (Kg)": l.kgFrio || 0,
+        "Estado Operativo": l.estado,
+        "Último Destino Despacho": l.destino || "N/A"
+      }));
+
+      let ws = XLSX.utils.json_to_sheet(dataJson);
+      let wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "SIPMA Trazabilidad");
+      
+      XLSX.writeFile(wb, `SIPMA_Reporte_Matadero_${lotes.length}_Lotes.xlsx`);
+      alert(`✅ Excel generado con éxito. Exportación registrada para: ${correo}`);
+    }
+
+    // LIMPIEZA DE DATOS CON CLAVE (13625669)
+    function eliminarTodoConClave() {
+      let clave = prompt("⚠️ Limpieza de Datos (Clave: 13625669): Ingrese el código especial:");
+      if(clave === "13625669") {
+        if(confirm("🚨 ¿Desea eliminar de forma permanente la base de datos local de S.I.P.MA?")) {
+          lotes = [];
+          guardarDatos();
+          actualizarVistas();
+          document.getElementById("informe-ia-pantalla").textContent = "Base de datos limpia.";
+          alert("🧹 Base de datos reseteada con éxito.");
+        }
+      } else {
+        alert("❌ Clave incorrecta. Acción cancelada.");
+      }
+    }
+
+    // RESPALDO Y RESTAURACIÓN JSON
+    function guardarBackupFichero() {
+      let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({lotes, proveedores}));
+      let downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `BACKUP_SIPMA_${new Date().toISOString().slice(0,10)}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    }
+
+    function cargarBackupFichero(event) {
+      const archivo = event.target.files[0];
+      if (!archivo) return;
+      
+      const lector = new FileReader();
+      lector.onload = function(e) {
+        try {
+          const parseado = JSON.parse(e.target.result);
+          if (parseado.lotes) {
+            lotes = parseado.lotes;
+            if(parseado.proveedores) proveedores = parseado.proveedores;
+            guardarDatos();
+            actualizarVistas();
+            alert("🗄️ Respaldo de S.I.P.MA cargado con éxito.");
+          } else {
+            alert("❌ Archivo de respaldo no válido.");
+          }
+        } catch (err) {
+          alert("❌ Error al procesar el archivo JSON.");
+        }
+      };
+      lector.readAsText(archivo);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // Iniciar Reloj en Vivo de la Portada
+      actualizarRelojPortada();
+      setInterval(actualizarRelojPortada, 1000);
+
+      // Cargar fecha predeterminada en recepción
+      document.getElementById("gasto-fecha").value = new Date().toISOString().slice(0, 10);
+      actualizarVistas();
+    });
+  </script>
+
+</body></html>
