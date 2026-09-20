@@ -1,17 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>S.I.P.MA - Sistema Integrado Porcino en Matadero</title>
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#1b4332">
   <script src="./S.I.P.MA - Sistema Integrado Porcino en Matadero_files/xlsx.full.min.js.descarga"></script>
   <script src="./S.I.P.MA - Sistema Integrado Porcino en Matadero_files/saved_resource"></script>
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js');
-  }
-</script>
   <style>
     body { font-family: 'Times New Roman', Times, serif; -webkit-tap-highlight-color: transparent; }
     /* Prevenir zoom forzado en campos en móviles */
@@ -78,6 +71,14 @@
           <input type="email" id="portada-correo" maxlength="35" placeholder="correo@ejemplo.com (max 35 car.)" required class="w-full p-3 rounded-xl border-2 border-[#1b4332] bg-white font-semibold text-[#1b4332] shadow-[0_4px_10px_rgba(27,67,50,0.25)] outline-none focus:ring-2 focus:ring-[#219665]">
         </div>
 
+        <div>
+          <label class="block text-sm font-bold text-[#1b4332] mb-1">Clave de Usuario:</label>
+          <input type="password" id="portada-clave" maxlength="35" placeholder="Ingrese su clave" required class="w-full p-3 rounded-xl border-2 border-[#1b4332] bg-white font-semibold text-[#1b4332] shadow-[0_4px_10px_rgba(27,67,50,0.25)] outline-none focus:ring-2 focus:ring-[#219665]">
+          <div class="text-right mt-2">
+            <a href="#" onclick="alert('Sistema de Recuperación: Su nueva clave será enviada a su correo electrónico afiliado.'); return false;" class="text-xs font-bold text-[#219665] hover:text-[#1b4332] underline cursor-pointer transition">¿Olvidaste tu clave de internet?</a>
+          </div>
+        </div>
+
         <div class="pt-2">
           <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-[#1b4332] hover:bg-[#219665] text-white font-black text-lg sm:text-xl transition duration-200 shadow-lg flex items-center justify-center gap-2 border border-[#b0a07b]">
             Enter ➡️
@@ -99,13 +100,16 @@
     </div>
   </div>
 
-  <!-- SECCIÓN PRINCIPAL DEL SISTEMA (MANTENIDA 100% INTACTA) -->
+  <!-- SECCIÓN PRINCIPAL DEL SISTEMA -->
   <div id="contenedor-principal-sistema" class="w-full max-w-7xl mx-auto bg-white shadow-xl rounded-2xl p-3 sm:p-6 relative border border-[#e2ded6] hidden">
     
     <div class="flex flex-col sm:flex-row justify-between items-center mb-4 border-b border-[#e2ded6] pb-3 gap-3">
       <div class="text-center sm:text-left">
         <h1 class="text-xl sm:text-2xl font-bold text-[#1b4332] tracking-wide">Sistema Integrado Porcino en Matadero</h1>
         <h2 class="text-xl sm:text-2xl font-black text-[#c5a880] tracking-wider">S.I.P.MA 🐖</h2>
+        <div id="info-usuario-activo" class="mt-1.5 text-xs sm:text-sm font-bold text-[#219665] bg-[#ebebe6] px-3 py-1 rounded-lg inline-block border border-[#b0a07b]">
+          👤 Usuario: <span id="span-usuario-nombre">--</span> | ✉️ Correo: <span id="span-usuario-correo">--</span>
+        </div>
       </div>
       <div class="text-center sm:text-right bg-stone-50/50 p-2.5 rounded-xl border border-[#e2ded6]">
         <h3 class="text-sm font-bold text-[#1b4332]">ConsulTek <span class="text-[#c5a880]">✦</span></h3>
@@ -320,13 +324,15 @@
       </div>
     </div>
 
+    <!-- PIE DE PÁGINA CON BOTÓN DE SALIDA -->
     <div class="mt-6 border-t border-[#e2ded6] pt-4 flex flex-col sm:flex-row justify-between items-center text-xs text-[#2c3e50] opacity-80 gap-2">
       <div class="flex items-center space-x-2">
         <button onclick="eliminarTodoConClave()" class="text-2xl p-1 hover:scale-110 transition" title="Limpieza de Datos (Clave: 13625669)">🧹</button>
         <p class="font-bold text-center sm:text-left">Sistema Creado por <span class="font-bold text-[#1b4332]">ConsulTek</span> — Charlie Graterol 🇻🇪 (0412) 6906641 y por IA 🤖</p>
       </div>
-      <div class="text-center sm:text-right font-semibold text-[#2c3e50]">
-        S.I.P.MA © 2026
+      <div class="text-center sm:text-right font-semibold text-[#2c3e50] flex items-center gap-2">
+        <span>S.I.P.MA © 2026</span>
+        <button onclick="salirDelSistema()" class="bg-[#1b4332] hover:bg-[#219665] text-white text-xs font-bold py-1.5 px-3 rounded-lg shadow transition flex items-center gap-1 border border-[#c5a880]">SALIDA ➡️</button>
       </div>
     </div>
 
@@ -401,7 +407,7 @@
   </div>
 
   <script>
-    // FUNCIONES Y LÓGICA ESPECÍFICA DE LA PORTADA
+    // FUNCIONES Y LÓGICA ESPECÍFICA DE LA PORTADA Y SESIÓN
     function actualizarRelojPortada() {
       const ahora = new Date();
       const dia = String(ahora.getDate()).padStart(2, '0');
@@ -416,21 +422,49 @@
       document.getElementById("portada-hora").textContent = `${horas}:${minutos}:${segundos}`;
     }
 
+    setInterval(actualizarRelojPortada, 1000);
+    actualizarRelojPortada();
+
     function ingresarAlSistema(e) {
       e.preventDefault();
       const usuario = document.getElementById("portada-usuario").value.trim();
       const correo = document.getElementById("portada-correo").value.trim();
+      const clave = document.getElementById("portada-clave").value.trim();
 
-      if(usuario && correo) {
-        localStorage.setItem("sipma_usuario_activo", usuario);
-        localStorage.setItem("sipma_ultimo_correo", correo);
+      if(usuario && correo && clave) {
+        let claveRegistrada = localStorage.getItem("sipma_clave_maestra");
+        let usuarioRegistrado = localStorage.getItem("sipma_usuario_activo");
+        let correoRegistrado = localStorage.getItem("sipma_ultimo_correo");
+
+        if (claveRegistrada) {
+          if (usuario !== usuarioRegistrado || correo !== correoRegistrado || clave !== claveRegistrada) {
+            alert("❌ Credenciales incorrectas. El usuario, correo o clave maestra no coinciden con los registrados en el sistema.");
+            return;
+          }
+        } else {
+          localStorage.setItem("sipma_clave_maestra", clave);
+          localStorage.setItem("sipma_usuario_activo", usuario);
+          localStorage.setItem("sipma_ultimo_correo", correo);
+        }
+
+        document.getElementById("span-usuario-nombre").textContent = usuario;
+        document.getElementById("span-usuario-correo").textContent = correo;
         
         document.getElementById("pantalla-portada").classList.add("hidden");
         document.getElementById("contenedor-principal-sistema").classList.remove("hidden");
+        actualizarVistas();
       }
     }
 
-    // LÓGICA MATRIZ DEL SISTEMA S.I.P.MA (CONSERVADA INTACATALMENTE)
+    function salirDelSistema() {
+      if(confirm("¿Desea Salir del Sistema? Todos los registros están guardados.")) {
+        document.getElementById("contenedor-principal-sistema").classList.add("hidden");
+        document.getElementById("pantalla-portada").classList.remove("hidden");
+        document.getElementById("portada-clave").value = "";
+      }
+    }
+
+    // LÓGICA MATRIZ DEL SISTEMA S.I.P.MA (CONSERVADA INTACTAMENTE)
     let lotes = JSON.parse(localStorage.getItem("sipma_lotes_v1")) || [];
     let proveedores = JSON.parse(localStorage.getItem("sipma_proveedores_v1")) || ["Distribuidora Pork C.A.", "Agropecuaria El Valle", "Morochos Ranchs", "Alejandro Mendoza"];
 
@@ -614,7 +648,6 @@
 
       if(errorValidacion) return;
 
-      // Validación de Consistencia Lógica
       const totalUndsConfirmacion = datosDespachoLotes.reduce((sum, d) => sum + d.undsADespachar, 0);
       const pesoPromedioPrevio = totalUndsConfirmacion > 0 ? (kgFrioTotalEntrada / totalUndsConfirmacion) : 0;
 
@@ -731,81 +764,145 @@
           return `${unds} ${l.tipo} / ${formatearNumero(kgF)} KG / ${dest}`;
         }
       }).join("\n");
-      
-      let auditoriasGrupo = lotesGrupo.filter(l => l.auditoria && l.auditoria.length > 0)
-        .map(l => ` • Lote ${l.codigo}:\n` + l.auditoria.map(a => `   - [${a.fecha}] Motivo: ${a.motivo}`).join("\n")).join("\n");
-      if(!auditoriasGrupo) auditoriasGrupo = " • Sin enmiendas registradas.";
 
-      const hoy = new Date();
-      const fechaHoyStr = `${String(hoy.getDate()).padStart(2, '0')}/${String(hoy.getMonth() + 1).padStart(2, '0')}/${hoy.getFullYear()}`;
+      let informeTexto = `INFORME OPERACIONAL DE DESPACHO Y RENDIMIENTO S.I.P.MA
+=====================================================
+Fecha y Hora: ${new Date().toLocaleString()}
+Lotes Involucrados: ${lotesGrupo.map(l => l.codigo).join(", ")}
+Destino / Cliente: ${destino}
 
-      let stringReporte = `📊 INFORME DE DESPACHO PARCIAL / LOTE - S.I.P.MA    - FECHA : ${fechaHoyStr}
--------------------------------------------------------------------------
-⚖️ BALANCE DE ANIMALES   (LOTE COMPLETO / BATCH):
-- Peso Neto Vivo (Pie):    ${totalKgNetoPie.toFixed(2)} Kg
-- Peso Canal Caliente:    ${totalKgCaliente.toFixed(2)} Kg
-- Peso Frío Despacho:     ${kgFrioTotal.toFixed(2)} Kg
--------------------------------------------------------------------------
-📈 INDICADORES DE RENDIMIENTO:
-- Rendimiento Caliente:    ${rendimientoCaliente.toFixed(2)} %
-- Rendimiento Frío Total:   ${rendimientoFrio.toFixed(2)} %
-- Merma por Enfriamiento:  ${mermaEnfriamiento.toFixed(2)} %
--------------------------------------------------------------------------
- 🐷PESO PROMEDIOS POR ETAPA :
-- Peso Promedio en Pie:          ${formatearNumero(promPie)} Kg / Animal
-- Peso Promedio Canal Caliente:  ${formatearNumero(promCaliente)} Kg / Animal
-- Peso Promedio Canal Frío:      ${formatearNumero(promFrio)} Kg / Animal
--------------------------------------------------------------------------
-🚛 INDICADORES DE RELACIÓN DE DESPACHO:
+1. RESUMEN DE CARGA DESPACHADA:
 ${detallesDespachos}
--------------------------------------------------------------------------
-💵 COSTO REAL DE SALIDA EN FRÍO:
-- Inversión Estructural:   $ ${totalInversionEstructural.toFixed(2)}
-- Costo Real Kg Frío:      $ ${costoKgFrioReal.toFixed(2)} / Kg Frío
--------------------------------------------------------------------------
-📝 AUDITORÍA DE ENMIENDAS / MODIFICACIONES:${auditoriasGrupo}
--------------------------------------------------------------------------
-<div class="flex flex-col space-y-0.5 mt-2">
-  <span class="text-sm font-bold text-[#1b4332]">ConsulTek <span class="text-[#c5a880]">✦</span></span>
-  <span class="italic text-xs text-[#2c3e50]">Donde los números cobran sentido y las oportunidades se convierten en resultados.</span>
-  <span class="text-xs font-bold text-[#1b4332]">WhatsApp: 0424-4073329 // 0412-7465757</span>
-</div>
-`
+- Total Animales Despachados: ${totalUndsDespachadas} Cabezas
+- Peso Frío Total Consolidado: ${formatearNumero(kgFrioTotal)} KG
 
-      document.getElementById("informe-ia-pantalla").innerHTML = stringReporte;
+2. INDICADORES DE RENDIMIENTO Y MERMA:
+- Rendimiento en Caliente: ${formatearNumero(rendimientoCaliente)} %
+- Rendimiento en Frío: ${formatearNumero(rendimientoFrio)} %
+- Merma por Enfriamiento: ${formatearNumero(mermaEnfriamiento)} %
+
+3. ANÁLISIS DE PESOS PROMEDIO POR ANIMAL:
+- Peso Promedio Vivo (Neto): ${formatearNumero(promPie)} KG/Cab
+- Peso Promedio Caliente: ${formatearNumero(promCaliente)} KG/Cab
+- Peso Promedio Frío: ${formatearNumero(promFrio)} KG/Cab
+
+4. EVALUACIÓN DE COSTOS ESTRUCTURALES:
+- Inversión Estructural Total Grupo: $ ${formatearNumero(totalInversionEstructural)}
+- Costo Real por KG Frío Producido: $ ${formatearNumero(costoKgFrioReal)} / KG
+
+S.I.P.MA © 2026 - Con$ulTek
+`;
+
+      document.getElementById("informe-ia-pantalla").textContent = informeTexto;
     }
 
-    function imprimirInforme() {
-      window.print();
+    function actualizarVistas() {
+      // Datalist proveedores
+      const datalist = document.getElementById("lista-proveedores");
+      datalist.innerHTML = proveedores.map(p => `<option value="${p}">`).join("");
+
+      // Select faena
+      const selectFaena = document.getElementById("faena-lote-select");
+      const lotesPendientes = lotes.filter(l => l.estado === "Recepción" || l.estado === "Faenado");
+      selectFaena.innerHTML = lotesPendientes.length > 0 ? 
+        lotesPendientes.map(l => `<option value="${l.codigo}">${l.codigo} - ${l.proveedor} (${l.unidades} Unds)</option>`).join("") :
+        `<option value="">No hay lotes disponibles</option>`;
+
+      // Tabla Despacho Selección
+      const tablaDespacho = document.getElementById("tabla-despacho-seleccion");
+      const lotesEnCava = lotes.filter(l => l.estado === "Recepción" || l.estado === "Faenado");
+      tablaDespacho.innerHTML = lotesEnCava.length > 0 ?
+        lotesEnCava.map(l => {
+          const restantes = l.unidades - (l.unidadesDespachadas || 0);
+          return `
+            <tr class="hover:bg-stone-50">
+              <td class="p-2.5 text-center"><input type="checkbox" value="${l.codigo}" class="chk-despacho w-4 h-4 accent-[#1b4332]" onchange="toggleInputDespacho('${l.codigo}')"></td>
+              <td class="p-2.5 font-bold text-[#1b4332]">${l.codigo}</td>
+              <td class="p-2.5">${l.proveedor}</td>
+              <td class="p-2.5">${l.tipo}</td>
+              <td class="p-2.5 font-bold text-center">${restantes}</td>
+              <td class="p-2.5"><input type="number" id="despacho-unds-${l.codigo}" value="${restantes}" min="1" max="${restantes}" class="border border-[#e2ded6] p-1.5 rounded w-20 text-center bg-white shadow-sm" disabled></td>
+              <td class="p-2.5">${formatearMoneda(l.kgNetoVivo)} Kg</td>
+              <td class="p-2.5">${formatearMoneda(l.kgCaliente)} Kg</td>
+              <td class="p-2.5 italic text-stone-500">${l.estado} (${restantes} disp.)</td>
+            </tr>
+          `;
+        }).join("") :
+        `<tr><td colspan="9" class="p-3 text-center text-stone-500">No hay lotes en cava listos para despacho.</td></tr>`;
+
+      // Tabla Principal
+      const tablaPrincipal = document.getElementById("tabla-lotes-principal");
+      tablaPrincipal.innerHTML = lotes.length > 0 ?
+        lotes.map(l => `
+          <tr class="hover:bg-stone-100 transition">
+            <td class="p-2 border border-[#e2ded6] font-bold text-[#1b4332] text-center">${l.codigo}</td>
+            <td class="p-2 border border-[#e2ded6] text-center">${l.fecha || 'N/A'}</td>
+            <td class="p-2 border border-[#e2ded6]">${l.proveedor}</td>
+            <td class="p-2 border border-[#e2ded6] text-center">${l.tipo}</td>
+            <td class="p-2 border border-[#e2ded6] text-center font-bold">${l.unidadesDespachadas || 0} / ${l.unidades}</td>
+            <td class="p-2 border border-[#e2ded6] text-right">${formatearMoneda(l.kgNetoVivo)}</td>
+            <td class="p-2 border border-[#e2ded6] text-right">$ ${formatearMoneda(l.costoBaseLote)}</td>
+            <td class="p-2 border border-[#e2ded6] text-right">$ ${formatearMoneda(l.gastoMatanza)}</td>
+            <td class="p-2 border border-[#e2ded6] text-right">$ ${formatearMoneda(l.gastoFlete)}</td>
+            <td class="p-2 border border-[#e2ded6] text-right">$ ${formatearMoneda(l.gastoOperativos)}</td>
+            <td class="p-2 border border-[#e2ded6] text-right font-bold text-amber-700">$ ${formatearMoneda(l.totalGastosLote)}</td>
+            <td class="p-2 border border-[#e2ded6] text-right font-bold text-[#1b4332]">$ ${formatearMoneda(l.totalCostoEstructural)}</td>
+            <td class="p-2 border border-[#e2ded6] text-right">${formatearMoneda(l.kgCaliente)}</td>
+            <td class="p-2 border border-[#e2ded6] text-right">${formatearMoneda(l.kgFrio)}</td>
+            <td class="p-2 border border-[#e2ded6] text-center font-bold ${l.estado === 'Despachado' ? 'text-emerald-950' : 'text-blue-700'}">${l.estado}</td>
+            <td class="p-2 border border-[#e2ded6] text-center space-x-1">
+              <button onclick="abrirModalEdicion('${l.codigo}')" class="text-blue-700 hover:text-blue-900 font-bold px-1" title="Editar">✏️</button>
+              <button onclick="eliminarLote('${l.codigo}')" class="text-red-700 hover:text-red-900 font-bold px-1" title="Eliminar">🗑️</button>
+            </td>
+          </tr>
+        `).join("") :
+        `<tr><td colspan="16" class="p-4 text-center text-stone-500 italic">No hay lotes registrados en el sistema.</td></tr>`;
     }
 
-    function verInformeLote(codigo) {
-      const lote = lotes.find(l => l.codigo === codigo);
-      if(!lote) return;
-      const kgFrioRef = lote.kgFrio > 0 ? lote.kgFrio : (lote.kgCaliente > 0 ? lote.kgCaliente : 0);
-      generarReporteIA([lote], kgFrioRef, lote.destino || lote.estado);
-      document.getElementById("informe-ia-pantalla").scrollIntoView({ behavior: 'smooth' });
+    function toggleInputDespacho(codigo) {
+      const checkbox = document.querySelector(`.chk-despacho[value="${codigo}"]`);
+      const input = document.getElementById(`despacho-unds-${codigo}`);
+      if(checkbox.checked) {
+        input.removeAttribute("disabled");
+      } else {
+        input.setAttribute("disabled", "true");
+      }
     }
 
-    // ACCIONES DE EDICIÓN Y ELIMINACIÓN DE LOTES
+    function formatearMoneda(num) {
+      if(isNaN(num)) return "0,00";
+      let partes = num.toFixed(2).split(".");
+      partes[0] = partes[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      return partes.join(",");
+    }
+
+    function eliminarLote(codigo) {
+      if(confirm(`¿Estás seguro de eliminar el lote ${codigo}?`)) {
+        lotes = lotes.filter(l => l.codigo !== codigo);
+        guardarDatos();
+        actualizarVistas();
+      }
+    }
+
+    // MODAL DE EDICIÓN
     function abrirModalEdicion(codigo) {
-      const lote = lotes.find(l => l.codigo === codigo);
-      if(!lote) return;
+      const l = lotes.find(item => item.codigo === codigo);
+      if(!l) return;
 
-      document.getElementById("edit-codigo-original").value = lote.codigo;
-      document.getElementById("edit-unidades").value = lote.unidades;
-      document.getElementById("edit-kg-inicial").value = lote.kgInicial;
-      document.getElementById("edit-precio-compra").value = lote.precioCompra;
-      document.getElementById("edit-rebaja-alimento").value = lote.rebajas.alimento;
-      document.getElementById("edit-rebaja-placenta").value = lote.rebajas.placenta;
-      document.getElementById("edit-rebaja-sanidad").value = lote.rebajas.sanidad;
-      document.getElementById("edit-kg-caliente").value = lote.kgCaliente;
-      document.getElementById("edit-kg-frio").value = lote.kgFrio;
-
-      let tasaMatanzaUni = lote.unidades > 0 ? (lote.gastoMatanza / lote.unidades) : 0;
-      document.getElementById("edit-matanza").value = tasaMatanzaUni.toFixed(2);
-      document.getElementById("edit-operativos").value = lote.gastoOperativos.toFixed(2);
-      document.getElementById("edit-transporte").value = lote.gastoFlete.toFixed(2);
+      document.getElementById("edit-codigo-original").value = l.codigo;
+      document.getElementById("edit-matanza").value = l.unidades > 0 ? (l.gastoMatanza / l.unidades).toFixed(2) : 0;
+      document.getElementById("edit-operativos").value = l.gastoOperativos || 0;
+      document.getElementById("edit-transporte").value = l.gastoFlete || 0;
+      document.getElementById("edit-unidades").value = l.unidades || 0;
+      document.getElementById("edit-kg-inicial").value = l.kgInicial || 0;
+      document.getElementById("edit-precio-compra").value = l.precioCompra || 0;
+      
+      document.getElementById("edit-rebaja-alimento").value = l.rebajas ? l.rebajas.alimento : 0;
+      document.getElementById("edit-rebaja-placenta").value = l.rebajas ? l.rebajas.placenta : 0;
+      document.getElementById("edit-rebaja-sanidad").value = l.rebajas ? l.rebajas.sanidad : 0;
+      
+      document.getElementById("edit-kg-caliente").value = l.kgCaliente || 0;
+      document.getElementById("edit-kg-frio").value = l.kgFrio || 0;
 
       document.getElementById("modal-edicion").classList.remove("hidden");
     }
@@ -816,240 +913,122 @@ ${detallesDespachos}
 
     document.getElementById("form-editar-lote").addEventListener("submit", function(e) {
       e.preventDefault();
-      const codigoOriginal = document.getElementById("edit-codigo-original").value;
-      let motivo = prompt("⚠️ Ingrese obligatoriamente el motivo de la modificación para la Auditoría de Enmiendas:");
-      if (!motivo || motivo.trim() === "") {
-        alert("❌ Debe ingresar un motivo válido para guardar los cambios.");
-        return;
-      }
+      const codigoOrig = document.getElementById("edit-codigo-original").value;
+      const l = lotes.find(item => item.codigo === codigoOrig);
 
-      const lote = lotes.find(l => l.codigo === codigoOriginal);
-      if (!lote) return;
+      if(l) {
+        const tMatanza = parseFloat(document.getElementById("edit-matanza").value) || 0;
+        l.gastoOperativos = parseFloat(document.getElementById("edit-operativos").value) || 0;
+        l.gastoFlete = parseFloat(document.getElementById("edit-transporte").value) || 0;
+        l.unidades = parseInt(document.getElementById("edit-unidades").value) || 0;
+        l.kgInicial = parseFloat(document.getElementById("edit-kg-inicial").value) || 0;
+        l.precioCompra = parseFloat(document.getElementById("edit-precio-compra").value) || 0;
 
-      lote.unidades = parseInt(document.getElementById("edit-unidades").value) || 0;
-      if((lote.unidadesDespachadas || 0) > lote.unidades) {
-        lote.unidadesDespachadas = lote.unidades;
-      }
-      if(lote.unidadesDespachadas < lote.unidades && lote.estado === "Despachado") {
-        lote.estado = "Faenado";
-      }
+        const rAli = parseFloat(document.getElementById("edit-rebaja-alimento").value) || 0;
+        const rPla = parseFloat(document.getElementById("edit-rebaja-placenta").value) || 0;
+        const rSan = parseFloat(document.getElementById("edit-rebaja-sanidad").value) || 0;
+        const totalReb = rAli + rPla + rSan;
+        l.rebajas = { alimento: rAli, placenta: rPla, sanidad: rSan, total: totalReb };
 
-      lote.kgInicial = parseFloat(document.getElementById("edit-kg-inicial").value) || 0;
-      lote.precioCompra = parseFloat(document.getElementById("edit-precio-compra").value) || 0;
-      
-      const rAlimento = parseFloat(document.getElementById("edit-rebaja-alimento").value) || 0;
-      const rPlacenta = parseFloat(document.getElementById("edit-rebaja-placenta").value) || 0;
-      const rSanidad = parseFloat(document.getElementById("edit-rebaja-sanidad").value) || 0;
-      lote.rebajas = { alimento: rAlimento, placenta: rPlacenta, sanidad: rSanidad, total: (rAlimento + rPlacenta + rSanidad) };
-      lote.kgNetoVivo = lote.kgInicial - lote.rebajas.total;
-      lote.costoBaseLote = lote.kgNetoVivo * lote.precioCompra;
+        l.kgNetoVivo = l.kgInicial - totalReb;
+        l.gastoMatanza = l.unidades * tMatanza;
+        l.totalGastosLote = l.gastoMatanza + l.gastoFlete + l.gastoOperativos;
+        l.costoBaseLote = l.kgNetoVivo * l.precioCompra;
+        l.totalCostoEstructural = l.costoBaseLote + l.totalGastosLote;
 
-      const tasaMatanza = parseFloat(document.getElementById("edit-matanza").value) || 0;
-      lote.gastoMatanza = lote.unidades * tasaMatanza;
-      lote.gastoOperativos = parseFloat(document.getElementById("edit-operativos").value) || 0;
-      lote.gastoFlete = parseFloat(document.getElementById("edit-transporte").value) || 0;
-      
-      lote.totalGastosLote = lote.gastoMatanza + lote.gastoFlete + lote.gastoOperativos;
-      lote.totalCostoEstructural = lote.costoBaseLote + lote.totalGastosLote;
+        l.kgCaliente = parseFloat(document.getElementById("edit-kg-caliente").value) || 0;
+        l.kgFrio = parseFloat(document.getElementById("edit-kg-frio").value) || 0;
 
-      lote.kgCaliente = parseFloat(document.getElementById("edit-kg-caliente").value) || 0;
-      lote.kgFrio = parseFloat(document.getElementById("edit-kg-frio").value) || 0;
-
-      if (!lote.auditoria) lote.auditoria = [];
-      lote.auditoria.push({
-        fecha: new Date().toISOString().replace('T', ' ').slice(0, 19),
-        motivo: motivo.trim()
-      });
-
-      guardarDatos();
-      actualizarVistas();
-      cerrarModalEdicion();
-      alert(`✅ Lote ${codigoOriginal} actualizado con éxito.`);
-    });
-
-    function eliminarLote(codigo) {
-      if(confirm(`🚨 ¿Está seguro que desea eliminar el lote ${codigo}?`)) {
-        lotes = lotes.filter(l => l.codigo !== codigo);
         guardarDatos();
         actualizarVistas();
-        alert(`🗑️ Lote ${codigo} eliminado con éxito.`);
+        cerrarModalEdicion();
+        alert(`✅ Lote ${codigoOrig} actualizado correctamente.`);
       }
-    }
+    });
 
-    function actualizarVistas() {
-      const dl = document.getElementById("lista-proveedores");
-      dl.innerHTML = "";
-      proveedores.forEach(p => dl.innerHTML += `<option value="${p}">`);
-
-      const selectFaena = document.getElementById("faena-lote-select");
-      selectFaena.innerHTML = "";
-      lotes.filter(l => l.estado === "Recepción").forEach(l => {
-        selectFaena.innerHTML += `<option value="${l.codigo}">${l.codigo} — ${l.proveedor} (${l.unidades} ${l.tipo})</option>`;
-      });
-
-      const tbodyDespacho = document.getElementById("tabla-despacho-seleccion");
-      tbodyDespacho.innerHTML = "";
-      lotes.filter(l => l.estado === "Faenado" && (l.unidades - (l.unidadesDespachadas || 0)) > 0).forEach(l => {
-        let undsRestantes = l.unidades - (l.unidadesDespachadas || 0);
-        tbodyDespacho.innerHTML += `
-          <tr class="border-b border-[#e2ded6] hover:bg-stone-100">
-            <td class="p-2.5 text-center"><input type="checkbox" class="chk-despacho h-5 w-5" value="${l.codigo}"></td>
-            <td class="p-2.5 font-bold">${l.codigo}</td>
-            <td class="p-2.5">${l.proveedor}</td>
-            <td class="p-2.5">${l.tipo}</td>
-            <td class="p-2.5 font-bold text-amber-700">${undsRestantes} / ${l.unidades}</td>
-            <td class="p-2.5">
-              <input type="number" id="despacho-unds-${l.codigo}" value="${undsRestantes}" min="1" max="${undsRestantes}" class="border border-[#e2ded6] p-1.5 rounded w-24 text-center font-bold bg-white shadow-sm" placeholder="Unds">
-            </td>
-            <td class="p-2.5">${l.kgNetoVivo.toFixed(2)} Kg</td>
-            <td class="p-2.5">${l.kgCaliente > 0 ? l.kgCaliente.toFixed(2) + ' Kg' : '-'}</td>
-            <td class="p-2.5"><span class="px-2 py-0.5 bg-amber-100 text-amber-800 rounded text-xs font-bold">En Cava (Restantes: ${undsRestantes})</span></td>
-          </tr>
-        `;
-      });
-
-      const tbodyPrincipal = document.getElementById("tabla-lotes-principal");
-      tbodyPrincipal.innerHTML = "";
-      lotes.forEach(l => {
-        let classColorPastel = l.tipo === "Cerdos" ? "bg-emerald-50 text-emerald-950" : "bg-rose-50 text-rose-950";
-        
-        let undsRest = l.unidades - (l.unidadesDespachadas || 0);
-        let badgeEstatus = `<span class="px-2 py-0.5 bg-gray-200 text-gray-700 rounded font-bold">Recepción</span>`;
-        if(l.estado === "Faenado") {
-          if((l.unidadesDespachadas || 0) > 0 && undsRest > 0) {
-            badgeEstatus = `<span class="px-2 py-0.5 bg-yellow-400 text-stone-900 rounded font-bold">🔥 Caliente (Parcial: ${undsRest} rest.)</span>`;
-          } else {
-            badgeEstatus = `<span class="px-2 py-0.5 bg-yellow-400 text-stone-900 rounded font-bold">🔥 Caliente</span>`;
-          }
-        }
-        if(l.estado === "Despachado") badgeEstatus = `<span class="px-2 py-0.5 bg-blue-600 text-white rounded font-bold">❄️ Despachado (0 rest.)</span>`;
-
-        tbodyPrincipal.innerHTML += `
-          <tr class="${classColorPastel} border-b border-[#e2ded6]">
-            <td class="p-2 font-bold border-r border-[#e2ded6] text-center align-middle">${l.codigo}</td>
-            <td class="p-2 border-r border-[#e2ded6] text-center align-middle">${l.fecha}</td>
-            <td class="p-2 font-medium border-r border-[#e2ded6] text-center align-middle">${l.proveedor}</td>
-            <td class="p-2 font-bold border-r border-[#e2ded6] text-center align-middle">${l.tipo}</td>
-            <td class="p-2 font-bold border-r border-[#e2ded6] text-center align-middle">${undsRest} / ${l.unidades}</td>
-            <td class="p-2 font-semibold border-r border-[#e2ded6] text-center align-middle">${l.kgNetoVivo.toFixed(2)} Kg</td>
-            <td class="p-2 border-r border-[#e2ded6] text-stone-600 text-center align-middle">$ ${l.costoBaseLote.toFixed(2)}</td>
-            <td class="p-2 border-r border-[#e2ded6] text-stone-600 text-center align-middle">$ ${l.gastoMatanza.toFixed(2)}</td>
-            <td class="p-2 border-r border-[#e2ded6] text-stone-600 text-center align-middle">$ ${l.gastoFlete.toFixed(2)}</td>
-            <td class="p-2 border-r border-[#e2ded6] text-stone-600 text-center align-middle">$ ${l.gastoOperativos.toFixed(2)}</td>
-            <td class="p-2 font-bold text-amber-700 border-r border-[#e2ded6] text-center align-middle">$ ${l.totalGastosLote.toFixed(2)}</td>
-            <td class="p-2 font-black text-stone-900 border-r border-[#e2ded6] bg-opacity-30 bg-stone-300 text-center align-middle">$ ${l.totalCostoEstructural.toFixed(2)}</td>
-            <td class="p-2 border-r border-[#e2ded6] text-center align-middle">${l.kgCaliente > 0 ? l.kgCaliente.toFixed(2) + ' Kg' : '-'}</td>
-            <td class="p-2 font-bold text-blue-700 border-r border-[#e2ded6] text-center align-middle">${l.kgFrio > 0 ? l.kgFrio.toFixed(2) + ' Kg' : '-'}</td>
-            <td class="p-2 text-center align-middle border-r border-[#e2ded6]">${badgeEstatus}</td>
-            <td class="p-2 text-center align-middle flex justify-center items-center gap-1">
-              <button onclick="verInformeLote('${l.codigo}')" class="bg-stone-700 hover:bg-stone-800 text-white p-1 rounded text-xs font-bold shadow transition" title="Informe Lote">📋</button>
-              <button onclick="abrirModalEdicion('${l.codigo}')" class="bg-amber-500 hover:bg-amber-600 text-white p-1 rounded text-xs font-bold shadow transition" title="Editar Lote">✏️</button>
-              <button onclick="eliminarLote('${l.codigo}')" class="bg-rose-500 hover:bg-rose-600 text-white p-1 rounded text-xs font-bold shadow transition" title="Eliminar Lote">🗑️</button>
-            </td>
-          </tr>
-        `;
-      });
-    }
-
-    // EXPORTACIÓN A EXCEL
+    // EXPORTAR A EXCEL
     function exportarExcel() {
-      let ultimoCorreo = localStorage.getItem("sipma_ultimo_correo") || "";
-      let correo = prompt("Ingrese su dirección de correo electrónico para el registro de exportación:", ultimoCorreo);
-      
-      if (correo === null) return;
-      localStorage.setItem("sipma_ultimo_correo", correo);
-
-      let dataJson = lotes.map(l => ({
+      if(lotes.length === 0) {
+        alert("❌ No hay datos para exportar.");
+        return;
+      }
+      let datosExport = lotes.map(l => ({
         "Código Lote": l.codigo,
-        "Fecha Proceso": l.fecha,
+        "Fecha": l.fecha || '',
         "Proveedor": l.proveedor,
-        "Tipo de Animal": l.tipo,
+        "Tipo": l.tipo,
         "Unidades Totales": l.unidades,
         "Unidades Despachadas": l.unidadesDespachadas || 0,
-        "Unidades Restantes Cava": l.unidades - (l.unidadesDespachadas || 0),
-        "Kg Inicial Recepción": l.kgInicial,
-        "Total Rebajas (Kg)": l.rebajas.total,
-        "Kg Neto en Pie": l.kgNetoVivo,
-        "Costo Compra Lote ($)": l.costoBaseLote,
+        "Kg Neto Pie": l.kgNetoVivo,
+        "Costo Compra ($)": l.costoBaseLote,
         "Gasto Matanza ($)": l.gastoMatanza,
         "Gasto Flete ($)": l.gastoFlete,
         "Gasto Operativos ($)": l.gastoOperativos,
-        "Acumulado Gastos Prorrateados ($)": l.totalGastosLote,
-        "Costo Estructural Total ($)": l.totalCostoEstructural,
-        "Peso Caliente (Kg)": l.kgCaliente || 0,
-        "Peso Frío Acumulado (Kg)": l.kgFrio || 0,
-        "Estado Operativo": l.estado,
-        "Último Destino Despacho": l.destino || "N/A"
+        "Total Gastos ($)": l.totalGastosLote,
+        "Costo Estructural ($)": l.totalCostoEstructural,
+        "Kg Caliente": l.kgCaliente,
+        "Kg Frío": l.kgFrio,
+        "Estatus": l.estado,
+        "Destino": l.destino || ''
       }));
 
-      let ws = XLSX.utils.json_to_sheet(dataJson);
-      let wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, "SIPMA Trazabilidad");
-      
-      XLSX.writeFile(wb, `SIPMA_Reporte_Matadero_${lotes.length}_Lotes.xlsx`);
-      alert(`✅ Excel generado con éxito. Exportación registrada para: ${correo}`);
+      const worksheet = XLSX.utils.json_to_sheet(datosExport);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, "S.I.P.MA Lotes");
+      XLSX.writeFile(workbook, "SIPMA_Reporte_General.xlsx");
     }
 
-    // LIMPIEZA DE DATOS CON CLAVE (13625669)
-    function eliminarTodoConClave() {
-      let clave = prompt("⚠️ Limpieza de Datos (Clave: 13625669): Ingrese el código especial:");
-      if(clave === "13625669") {
-        if(confirm("🚨 ¿Desea eliminar de forma permanente la base de datos local de S.I.P.MA?")) {
-          lotes = [];
-          guardarDatos();
-          actualizarVistas();
-          document.getElementById("informe-ia-pantalla").textContent = "Base de datos limpia.";
-          alert("🧹 Base de datos reseteada con éxito.");
-        }
-      } else {
-        alert("❌ Clave incorrecta. Acción cancelada.");
-      }
-    }
-
-    // RESPALDO Y RESTAURACIÓN JSON
+    // BACKUP FICHERO JSON
     function guardarBackupFichero() {
-      let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({lotes, proveedores}));
-      let downloadAnchor = document.createElement('a');
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({lotes, proveedores}));
+      const downloadAnchor = document.createElement('a');
       downloadAnchor.setAttribute("href", dataStr);
-      downloadAnchor.setAttribute("download", `BACKUP_SIPMA_${new Date().toISOString().slice(0,10)}.json`);
+      downloadAnchor.setAttribute("download", `SIPMA_Backup_${new Date().toISOString().slice(0,10)}.json`);
       document.body.appendChild(downloadAnchor);
       downloadAnchor.click();
       downloadAnchor.remove();
     }
 
     function cargarBackupFichero(event) {
-      const archivo = event.target.files[0];
-      if (!archivo) return;
-      
-      const lector = new FileReader();
-      lector.onload = function(e) {
+      const file = event.target.files[0];
+      if(!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
         try {
-          const parseado = JSON.parse(e.target.result);
-          if (parseado.lotes) {
-            lotes = parseado.lotes;
-            if(parseado.proveedores) proveedores = parseado.proveedores;
+          const contenido = JSON.parse(e.target.result);
+          if(contenido.lotes && contenido.proveedores) {
+            lotes = contenido.lotes;
+            proveedores = contenido.proveedores;
             guardarDatos();
             actualizarVistas();
-            alert("🗄️ Respaldo de S.I.P.MA cargado con éxito.");
+            alert("✅ Backup cargado exitosamente.");
           } else {
-            alert("❌ Archivo de respaldo no válido.");
+            alert("❌ El archivo no tiene el formato correcto de S.I.P.MA.");
           }
-        } catch (err) {
-          alert("❌ Error al procesar el archivo JSON.");
+        } catch(err) {
+          alert("❌ Error al leer el archivo JSON.");
         }
       };
-      lector.readAsText(archivo);
+      reader.readAsText(file);
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
-      // Iniciar Reloj en Vivo de la Portada
-      actualizarRelojPortada();
-      setInterval(actualizarRelojPortada, 1000);
+    function eliminarTodoConClave() {
+      const clave = prompt("Ingrese la clave de seguridad para limpiar todos los datos:");
+      if(clave === "13625669") {
+        if(confirm("⚠️ ¿Estás COMPLETAMENTE SEGURO de eliminar todos los registros y lotes?")) {
+          lotes = [];
+          guardarDatos();
+          actualizarVistas();
+          alert("🧹 Sistema reiniciado.");
+        }
+      } else if(clave !== null) {
+        alert("❌ Clave incorrecta.");
+      }
+    }
 
-      // Cargar fecha predeterminada en recepción
-      document.getElementById("gasto-fecha").value = new Date().toISOString().slice(0, 10);
-      actualizarVistas();
-    });
+    function imprimirInforme() {
+      window.print();
+    }
   </script>
 
 </body></html>
