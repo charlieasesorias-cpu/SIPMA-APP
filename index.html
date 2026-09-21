@@ -3,6 +3,14 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>S.I.P.MA - Sistema Integrado Porcino en Matadero</title>
+
+  <!-- SOPORTE PWA / INSTALACIÓN COMO APLICACIÓN -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="S.I.P.MA">
+  <meta name="theme-color" content="#1b4332">
+  <link rel="manifest" href='data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22S.I.P.MA%20-%20Sistema%20Integrado%20Porcino%20en%20Matadero%22%2C%22short_name%22%3A%22S.I.P.MA%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23fcfbf7%22%2C%22theme_color%22%3A%22%231b4332%22%7D'>
+
   <script src="./S.I.P.MA - Sistema Integrado Porcino en Matadero_files/xlsx.full.min.js.descarga"></script>
   <script src="./S.I.P.MA - Sistema Integrado Porcino en Matadero_files/saved_resource"></script>
   <style>
@@ -407,6 +415,16 @@
   </div>
 
   <script>
+    // REGISTRO DE SERVICE WORKER PARA HABILITAR INSTALACIÓN PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        const swCode = "self.addEventListener('fetch', function(e) {});";
+        const blob = new Blob([swCode], { type: 'text/javascript' });
+        const swUrl = URL.createObjectURL(blob);
+        navigator.serviceWorker.register(swUrl).catch(() => {});
+      });
+    }
+
     // FUNCIONES Y LÓGICA ESPECÍFICA DE LA PORTADA Y SESIÓN
     function actualizarRelojPortada() {
       const ahora = new Date();
@@ -1018,7 +1036,7 @@ S.I.P.MA © 2026 - Con$ulTek
         if(confirm("⚠️ ¿Estás COMPLETAMENTE SEGURO de eliminar todos los registros y lotes?")) {
           lotes = [];
           guardarDatos();
-          actualizarVistas();
+          actualizarVinas();
           alert("🧹 Sistema reiniciado.");
         }
       } else if(clave !== null) {
